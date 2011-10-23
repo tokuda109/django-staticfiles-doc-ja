@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Management Commands &mdash; django-staticfiles-docs-ja v1.1.2 documentation</title>
+    <title>管理コマンド &mdash; django-staticfiles-docs-ja v1.1.2 documentation</title>
     <link rel="stylesheet" href="static/default.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -23,8 +23,8 @@
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
     <link rel="top" title="django-staticfiles-docs-ja v1.1.2 documentation" href="index.html" />
-    <link rel="next" title="Helpers" href="helpers.html" />
-    <link rel="prev" title="Differences to django.contrib.staticfiles" href="index.html" /> 
+    <link rel="next" title="ヘルパー関数" href="helpers.html" />
+    <link rel="prev" title="django-staticfiles" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -37,10 +37,10 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="helpers.html" title="Helpers"
+          <a href="helpers.html" title="ヘルパー関数"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Differences to django.contrib.staticfiles"
+          <a href="index.html" title="django-staticfiles"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">django-staticfiles-docs-ja v1.1.2 documentation</a> &raquo;</li> 
       </ul>
@@ -51,93 +51,80 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="management-commands">
-<h1>Management Commands<a class="headerlink" href="#management-commands" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="id1">
+<h1>管理コマンド<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="collectstatic">
-<span id="id1"></span><h2>collectstatic<a class="headerlink" href="#collectstatic" title="Permalink to this headline">¶</a></h2>
-<p>Collects the static files from all installed apps and copies them to the
-<a class="reference internal" href="settings.html#staticfiles-storage"><em>STATICFILES_STORAGE</em></a>.</p>
-<p>Duplicate file names are resolved in a similar way to how template resolution
-works. Files are initially searched for in <a class="reference internal" href="settings.html#staticfiles-dirs"><em>STATICFILES_DIRS</em></a> locations,
-followed by apps in the order specified by the <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> setting.</p>
-<p>Some commonly used options are:</p>
-<dl class="docutils">
-<dt><tt class="docutils literal"><span class="pre">--noinput</span></tt></dt>
-<dd>Do NOT prompt the user for input of any kind.</dd>
-<dt><tt class="docutils literal"><span class="pre">-i</span> <span class="pre">PATTERN</span></tt> or <tt class="docutils literal"><span class="pre">--ignore=PATTERN</span></tt></dt>
-<dd>Ignore files or directories matching this glob-style pattern. Use multiple
-times to ignore more.</dd>
-<dt><tt class="docutils literal"><span class="pre">-n</span></tt> or <tt class="docutils literal"><span class="pre">--dry-run</span></tt></dt>
-<dd>Do everything except modify the filesystem.</dd>
-<dt><tt class="docutils literal"><span class="pre">-l</span></tt> or <tt class="docutils literal"><span class="pre">--link</span></tt></dt>
-<dd>Create a symbolic link to each file instead of copying.</dd>
-<dt><tt class="docutils literal"><span class="pre">--no-default-ignore</span></tt></dt>
-<dd>Don&#8217;t ignore the common private glob-style patterns <tt class="docutils literal"><span class="pre">'CVS'</span></tt>, <tt class="docutils literal"><span class="pre">'.*'</span></tt>
-and <tt class="docutils literal"><span class="pre">'*~'</span></tt>.</dd>
-</dl>
+<span id="id2"></span><h2>collectstatic<a class="headerlink" href="#collectstatic" title="Permalink to this headline">¶</a></h2>
+<p>インストールしている全てのアプリケーションから静的ファイルを集めて <a class="reference internal" href="settings.html#staticfiles-storage"><em>STATICFILES_STORAGE</em></a> にコピーします。</p>
+<p>ファイル名の重複は、似た方法で解決します。
+ファイルは <a class="reference internal" href="settings.html#staticfiles-dirs"><em>STATICFILES_DIRS</em></a> に指定した場所やアプリケーションの場所を最初に検索されます。</p>
+<p>一般的に使用するオプションは次のとおりです:</p>
+<p><tt class="docutils literal"><span class="pre">--noinput</span></tt></p>
+<blockquote>
+<div>あらゆる種類の入力を求めるプロンプトを表示しない。</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">-i</span> <span class="pre">PATTERN</span></tt> or <tt class="docutils literal"><span class="pre">--ignore=PATTERN</span></tt></p>
+<blockquote>
+<div>glob-styleのパターンに一致したファイルやディレクトリは無視します。さらに無視するには何回も使用して下さい。</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">-n</span></tt> or <tt class="docutils literal"><span class="pre">--dry-run</span></tt></p>
+<blockquote>
+<div>ファイルシステムを変更する以外のすべてを実行することができます。</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">-l</span></tt> or <tt class="docutils literal"><span class="pre">--link</span></tt></p>
+<blockquote>
+<div>コピーの代わりに、それぞれのファイルへのシンボリックリンクを作成します。</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">--no-default-ignore</span></tt></p>
+<blockquote>
+<div><tt class="docutils literal"><span class="pre">'CVS'</span></tt> や <tt class="docutils literal"><span class="pre">'.*'</span></tt> や <tt class="docutils literal"><span class="pre">'*~'</span></tt> のプライベートのglob-styleのパターンに無視しません。</div></blockquote>
 <p><tt class="docutils literal"><span class="pre">-c</span></tt> or <tt class="docutils literal"><span class="pre">--clear</span></tt></p>
 <blockquote>
 <div><p class="versionadded">
 <span class="versionmodified">New in version 1.1.</span></p>
-<p>Clear the existing files before trying to copy or link the original file.</p>
+<p>コピーかオリジナルのファイルにリンクする前に既にあるファイル消去します。</p>
 </div></blockquote>
 <p><tt class="docutils literal"><span class="pre">--no-post-process</span></tt></p>
 <blockquote>
 <div><p class="versionadded">
 <span class="versionmodified">New in version 1.1.</span></p>
-<p>Don&#8217;t call the
-<a class="reference internal" href="helpers.html#staticfiles.storage.StaticFilesStorage.post_process" title="staticfiles.storage.StaticFilesStorage.post_process"><tt class="xref py py-meth docutils literal"><span class="pre">post_process()</span></tt></a>
-method of the configured <a class="reference internal" href="settings.html#staticfiles-storage"><em>STATICFILES_STORAGE</em></a> storage backend.</p>
+<p>設定済みの <a class="reference internal" href="settings.html#staticfiles-storage"><em>STATICFILES_STORAGE</em></a> ストレージバックエンドの <a class="reference internal" href="helpers.html#staticfiles.storage.StaticFilesStorage.post_process" title="staticfiles.storage.StaticFilesStorage.post_process"><tt class="xref py py-meth docutils literal"><span class="pre">post_process()</span></tt></a> メソッドを実行しません。</p>
 </div></blockquote>
-<p>For a full list of options, refer to the collectstatic management command help
-by running:</p>
+<p>オプションの全てのリストについては、collectstaticの管理コマンドでhelpを実行して確認して下さい。</p>
 <div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> python manage.py collectstatic --help
 </pre></div>
 </div>
 </div>
 <div class="section" id="findstatic">
-<span id="id2"></span><h2>findstatic<a class="headerlink" href="#findstatic" title="Permalink to this headline">¶</a></h2>
-<p>Searches for one or more relative paths with the enabled finders:</p>
+<span id="id3"></span><h2>findstatic<a class="headerlink" href="#findstatic" title="Permalink to this headline">¶</a></h2>
+<p>有効化されているファインダーで一つ以上の相対パスを探索します。</p>
 <div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> python manage.py findstatic css/base.css admin/js/core.css
 <span class="go">/home/special.polls.com/core/media/css/base.css</span>
 <span class="go">/home/polls.com/core/media/css/base.css</span>
 <span class="go">/home/polls.com/src/django/contrib/admin/media/js/core.js</span>
 </pre></div>
 </div>
-<p>By default, all matching locations are found. To only return the first match
-for each relative path, use the <tt class="docutils literal"><span class="pre">--first</span></tt> option:</p>
+<p>デフォルトでは、一致するすべての場所が検索されます。``&#8211;first``オプションを使うと、それぞれの相対パスから最初に一致したものを返します。</p>
 <div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> python manage.py findstatic css/base.css --first
 <span class="go">/home/special.polls.com/core/media/css/base.css</span>
 </pre></div>
 </div>
-<p>This is a debugging aid; it&#8217;ll show you exactly which static file will be
-collected for a given path.</p>
+<p>これはデバッグ用で、静的ファイルが指定されたパスから正しく集められたか表示します。</p>
 </div>
 <div class="section" id="runserver">
 <h2>runserver<a class="headerlink" href="#runserver" title="Permalink to this headline">¶</a></h2>
-<p>Overrides the core <tt class="docutils literal"><span class="pre">runserver</span></tt> command if the <tt class="docutils literal"><span class="pre">staticfiles</span></tt> app
-is installed (in <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt>) and adds automatic serving of static
-files and the following new options.</p>
+<p><tt class="docutils literal"><span class="pre">staticfiles</span></tt> アプリケーションが( <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> に)インストールされている場合、Djangoの <tt class="docutils literal"><span class="pre">runserver</span></tt> コマンドが上書きされます。静的ファイルの自動的な配信機能と以下の新しいオプションが追加されました。</p>
 <p><tt class="docutils literal"><span class="pre">--nostatic</span></tt></p>
-<p>Use the <tt class="docutils literal"><span class="pre">--nostatic</span></tt> option to disable serving of static files with the
-<tt class="docutils literal"><span class="pre">staticfiles</span></tt> app entirely. This option is only available if the
-<tt class="docutils literal"><span class="pre">staticfiles</span></tt> app is in your project&#8217;s <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> setting.</p>
-<p>Example usage:</p>
+<p><tt class="docutils literal"><span class="pre">--nostatic</span></tt> オプションを使うと、``staticfiles`` アプリケーションで静的ファイルの配信できないようにします。
+このオプションはセッティングのプロジェクトの <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> の設定で <tt class="docutils literal"><span class="pre">staticfiles</span></tt> がインストールされている時のみ使えます。</p>
+<p>使用例</p>
 <div class="highlight-console"><div class="highlight"><pre><span class="go">django-admin.py runserver --nostatic</span>
 </pre></div>
 </div>
 <p><tt class="docutils literal"><span class="pre">--insecure</span></tt></p>
-<p>Use the <tt class="docutils literal"><span class="pre">--insecure</span></tt> option to force serving of static files with the
-<tt class="docutils literal"><span class="pre">staticfiles</span></tt> app even if the <tt class="docutils literal"><span class="pre">DEBUG</span></tt> setting is <tt class="xref docutils literal"><span class="pre">False</span></tt>.</p>
+<p><tt class="docutils literal"><span class="pre">--insecure</span></tt> オプションを使うと、設定の <tt class="docutils literal"><span class="pre">DEBUG</span></tt> を <tt class="xref docutils literal"><span class="pre">False</span></tt> にしていても <tt class="docutils literal"><span class="pre">staticfiles</span></tt> アプリケーションで静的ファイルを強制的に配信します。</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p>By using this you acknowledge the fact that it&#8217;s
-<strong>grossly inefficient</strong> and probably <strong>insecure</strong>.</p>
-<p class="last">This is only intended for local development, should
-<strong>never be used in production</strong> and is only available if the
-<tt class="docutils literal"><span class="pre">staticfiles</span></tt> app is in your project&#8217;s <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> setting.</p>
+<p>これを使用することで、 <strong>非効率的</strong> で <strong>セキュアではない</strong> ということを把握してください。</p>
+<p class="last">ローカル環境とセッティングの <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> で <tt class="docutils literal"><span class="pre">staticfiles</span></tt> がインストールされている時のみを対象としているので、 <strong>本番の環境では使わないで下さい</strong> 。</p>
 </div>
-<p>Example usage:</p>
+<p>使用例</p>
 <div class="highlight-console"><div class="highlight"><pre><span class="go">django-admin.py runserver --insecure</span>
 </pre></div>
 </div>
@@ -152,7 +139,7 @@ files and the following new options.</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Management Commands</a><ul>
+<li><a class="reference internal" href="#">管理コマンド</a><ul>
 <li><a class="reference internal" href="#collectstatic">collectstatic</a></li>
 <li><a class="reference internal" href="#findstatic">findstatic</a></li>
 <li><a class="reference internal" href="#runserver">runserver</a></li>
@@ -162,10 +149,10 @@ files and the following new options.</p>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="index.html"
-                        title="previous chapter">Differences to <tt class="docutils literal docutils literal"><span class="pre">django.contrib.staticfiles</span></tt></a></p>
+                        title="previous chapter">django-staticfiles</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="helpers.html"
-                        title="next chapter">Helpers</a></p>
+                        title="next chapter">ヘルパー関数</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="sources/commands.txt"
@@ -198,10 +185,10 @@ files and the following new options.</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="helpers.html" title="Helpers"
+          <a href="helpers.html" title="ヘルパー関数"
              >next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Differences to django.contrib.staticfiles"
+          <a href="index.html" title="django-staticfiles"
              >previous</a> |</li>
         <li><a href="index.html">django-staticfiles-docs-ja v1.1.2 documentation</a> &raquo;</li> 
       </ul>
