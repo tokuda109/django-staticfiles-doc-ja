@@ -1,0 +1,4 @@
+[submodule "_build/html"]
+    path = _build/html
+        url = git@github.com:tokuda109/django-staticfiles-doc-ja.git
+
