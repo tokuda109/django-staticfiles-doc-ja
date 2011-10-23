@@ -1,1 +1,251 @@
-My GitHub Page
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>django-staticfiles &mdash; django-staticfiles-docs-ja v1.1.2 documentation</title>
+    <link rel="stylesheet" href="static/default.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <link rel="top" title="django-staticfiles-docs-ja v1.1.2 documentation" href="#" />
+    <link rel="next" title="Management Commands" href="commands.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="commands.html" title="Management Commands"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">django-staticfiles-docs-ja v1.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="django-staticfiles">
+<h1>django-staticfiles<a class="headerlink" href="#django-staticfiles" title="Permalink to this headline">¶</a></h1>
+<p>This is a Django app that provides helpers for serving static files.</p>
+<p>Django developers mostly concern themselves with the dynamic parts of web
+applications &#8211; the views and templates that render new for each request. But
+web applications have other parts: the static media files (images, CSS,
+Javascript, etc.) that are needed to render a complete web page.</p>
+<p>For small projects, this isn&#8217;t a big deal, because you can just keep the media
+somewhere your web server can find it. However, in bigger projects &#8211; especially
+those comprised of multiple apps &#8211; dealing with the multiple sets of static
+files provided by each application starts to get tricky.</p>
+<p>That&#8217;s what <tt class="docutils literal"><span class="pre">staticfiles</span></tt> is for:</p>
+<blockquote>
+<div>Collecting static files from each of your Django apps (and any other
+place you specify) into a single location that can easily be served in
+production.</div></blockquote>
+<p>The main website for django-staticfiles is
+<a class="reference external" href="http://github.com/jezdez/django-staticfiles">github.com/jezdez/django-staticfiles</a> where you can also file tickets.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>django-staticfiles is now part of Django (since 1.3) as <tt class="docutils literal"><span class="pre">django.contrib.staticfiles</span></tt>.</p>
+<p>The django-staticfiles 0.3.X series will only receive security and data los
+bug fixes after the release of django-staticfiles 1.0. Any Django 1.2.X
+project using django-staticfiles 0.3.X and lower should be upgraded to use
+either Django &gt;= 1.3&#8217;s staticfiles app or django-staticfiles &gt;= 1.0 to
+profit from the new features and stability.</p>
+<p class="last">You may want to chose to use django-staticfiles instead of Django&#8217;s own
+staticfiles app since any new feature (additionally to those backported
+from Django) will be released first in django-staticfiles.</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Use your favorite Python packaging tool to install <tt class="docutils literal"><span class="pre">staticfiles</span></tt>
+from <a class="reference external" href="http://pypi.python.org/pypi/django-staticfiles">PyPI</a>, e.g.:</p>
+<div class="highlight-python"><pre>pip install django-staticfiles</pre>
+</div>
+<p>You can also install the <a class="reference external" href="http://github.com/jezdez/django-staticfiles/tarball/develop#egg=django-staticfiles-dev">in-development version</a> of django-staticfiles
+with <tt class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">django-staticfiles==dev</span></tt>.</p>
+</li>
+<li><p class="first">Added <tt class="docutils literal"><span class="pre">&quot;staticfiles&quot;</span></tt> to your <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> setting:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c"># ...</span>
+    <span class="s">&quot;staticfiles&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Set your <tt class="docutils literal"><span class="pre">STATIC_URL</span></tt> setting to the URL that handles serving
+static files:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STATIC_URL</span> <span class="o">=</span> <span class="s">&quot;/static/&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">In development mode (when <tt class="docutils literal"><span class="pre">DEBUG</span> <span class="pre">=</span> <span class="pre">True</span></tt>) the <tt class="docutils literal"><span class="pre">runserver</span></tt> command will
+automatically serve static files:</p>
+<div class="highlight-python"><pre>python manage.py runserver</pre>
+</div>
+</li>
+<li><p class="first">Once you are ready to deploy all static files of your site in a central
+directory (<tt class="docutils literal"><span class="pre">STATIC_ROOT</span></tt>) to be served by a real webserver (e.g. <a class="reference external" href="http://httpd.apache.org/">Apache</a>,
+<a class="reference external" href="http://www.cherokee-project.com/">Cherokee</a>, <a class="reference external" href="http://www.lighttpd.net/">Lighttpd</a>, <a class="reference external" href="http://wiki.nginx.org/">Nginx</a> etc.), use the <tt class="docutils literal"><span class="pre">collectstatic</span></tt> management
+command:</p>
+<div class="highlight-python"><pre>python manage.py collectstatic</pre>
+</div>
+<p>See the webserver&#8217;s documentation for descriptions how to setup serving
+the deployment directory (<tt class="docutils literal"><span class="pre">STATIC_ROOT</span></tt>).</p>
+</li>
+<li><p class="first">(optional) In case you use Django&#8217;s admin app, make sure the
+<tt class="docutils literal"><span class="pre">ADMIN_MEDIA_PREFIX</span></tt> setting is set correctly to a subpath of
+<tt class="docutils literal"><span class="pre">STATIC_URL</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ADMIN_MEDIA_PREFIX</span> <span class="o">=</span> <span class="n">STATIC_URL</span> <span class="o">+</span> <span class="s">&quot;admin/&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="differences-to-django-contrib-staticfiles">
+<h2>Differences to <tt class="docutils literal"><span class="pre">django.contrib.staticfiles</span></tt><a class="headerlink" href="#differences-to-django-contrib-staticfiles" title="Permalink to this headline">¶</a></h2>
+<p>Features of <tt class="docutils literal"><span class="pre">django-staticfiles</span></tt> which Django&#8217;s <tt class="docutils literal"><span class="pre">staticfiles</span></tt> <strong>doesn&#8217;t</strong>
+support:</p>
+<ul class="simple">
+<li>Runs on Django 1.2.X.</li>
+<li><tt class="docutils literal"><span class="pre">STATICFILES_EXCLUDED_APPS</span></tt> settings &#8211; A sequence of dotted app paths
+that should be ignored when searching for static files</li>
+<li>Legacy &#8216;media&#8217; dir file finder &#8211; a staticfiles finder that supports the
+location for static files that a lot of 3rd party apps support
+(<tt class="docutils literal"><span class="pre">staticfiles.finders.LegacyAppDirectoriesFinder</span></tt>).</li>
+</ul>
+<p>See the <a class="reference internal" href="settings.html"><em>Settings</em></a> docs for more information.</p>
+</div>
+<div class="section" id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">Management Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#collectstatic">collectstatic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#findstatic">findstatic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#runserver">runserver</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="helpers.html">Helpers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="helpers.html#context-processors">Context processors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="helpers.html#template-tags">Template tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="helpers.html#storages">Storages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#static-root"><tt class="docutils literal"><span class="pre">STATIC_ROOT</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#static-url"><tt class="docutils literal"><span class="pre">STATIC_URL</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#staticfiles-dirs"><tt class="docutils literal"><span class="pre">STATICFILES_DIRS</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#staticfiles-excluded-apps"><tt class="docutils literal"><span class="pre">STATICFILES_EXCLUDED_APPS</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#staticfiles-storage"><tt class="docutils literal"><span class="pre">STATICFILES_STORAGE</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#staticfiles-finders"><tt class="docutils literal"><span class="pre">STATICFILES_FINDERS</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#v1-1-2-2011-08-25">v1.1.2 (2011-08-25)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#v1-1-1-2011-08-22">v1.1.1 (2011-08-22)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#v1-1-2011-08-18">v1.1 (2011-08-18)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#v1-0-1-2011-03-28">v1.0.1 (2011-03-28)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#v1-0-2011-03-23">v1.0 (2011-03-23)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-3-4-2010-12-25">v0.3.4 (2010-12-25)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-3-3-2010-12-23">v0.3.3 (2010-12-23)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-3-2-2010-08-27">v0.3.2 (2010-08-27)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-3-1-2010-08-21">v0.3.1 (2010-08-21)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-3-0-2010-08-18">v0.3.0 (2010-08-18)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-2-0-2009-11-25">v0.2.0 (2009-11-25)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-1-2-2009-09-02">v0.1.2 (2009-09-02)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-1-1-2009-09-02">v0.1.1 (2009-09-02)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-1-0-2009-09-02">v0.1.0 (2009-09-02)</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">django-staticfiles</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#differences-to-django-contrib-staticfiles">Differences to <tt class="docutils literal"><span class="pre">django.contrib.staticfiles</span></tt></a></li>
+<li><a class="reference internal" href="#contents">Contents</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="commands.html"
+                        title="next chapter">Management Commands</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="commands.html" title="Management Commands"
+             >next</a> |</li>
+        <li><a href="#">django-staticfiles-docs-ja v1.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Tsuyoshi Tokuda.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.8.
+    </div>
+  </body>
+</html>

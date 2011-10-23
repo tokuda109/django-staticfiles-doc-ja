@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Helpers &mdash; django-staticfiles-docs-ja v1.1.2 documentation</title>
+    <link rel="stylesheet" href="static/default.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <link rel="top" title="django-staticfiles-docs-ja v1.1.2 documentation" href="index.html" />
+    <link rel="next" title="Settings" href="settings.html" />
+    <link rel="prev" title="Management Commands" href="commands.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="settings.html" title="Settings"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="commands.html" title="Management Commands"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">django-staticfiles-docs-ja v1.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-staticfiles">
+<span id="helpers"></span><h1>Helpers<a class="headerlink" href="#module-staticfiles" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="context-processors">
+<h2>Context processors<a class="headerlink" href="#context-processors" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="the-static-context-processor">
+<h3>The <tt class="docutils literal"><span class="pre">static</span></tt> context processor<a class="headerlink" href="#the-static-context-processor" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="staticfiles.context_processors.static">
+<tt class="descclassname">context_processors.</tt><tt class="descname">static</tt><big>(</big><big>)</big><a class="headerlink" href="#staticfiles.context_processors.static" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This context processor adds the <tt class="docutils literal"><span class="pre">STATIC_URL</span></tt> into each template
+context as the variable <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">STATIC_URL</span> <span class="pre">}}</span></tt>. To use it, make sure that
+<tt class="docutils literal"><span class="pre">'staticfiles.context_processors.static'</span></tt> appears somewhere in your
+<tt class="docutils literal"><span class="pre">TEMPLATE_CONTEXT_PROCESSORS</span></tt> setting.</p>
+<p>Remember, only templates rendered with a <tt class="docutils literal"><span class="pre">RequestContext</span></tt> will have
+acces to the data provided by this (and any) context processor.</p>
+</div>
+</div>
+<div class="section" id="template-tags">
+<h2>Template tags<a class="headerlink" href="#template-tags" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="static">
+<h3>static<a class="headerlink" href="#static" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="staticfiles.templatetags.staticfiles.static">
+<tt class="descclassname">templatetags.staticfiles.</tt><tt class="descname">static</tt><big>(</big><big>)</big><a class="headerlink" href="#staticfiles.templatetags.staticfiles.static" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="versionadded">
+<span class="versionmodified">New in version 1.1.</span></p>
+<p>Uses the configued <a class="reference internal" href="settings.html#staticfiles-storage"><em>STATICFILES_STORAGE</em></a> storage to create the
+full URL for the given relative path, e.g.:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">load</span> <span class="nv">staticfiles</span> <span class="cp">%}</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">static</span> <span class="s2">&quot;css/base.css&quot;</span> <span class="cp">%}</span><span class="s">&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>The previous example is equal to calling the <tt class="docutils literal"><span class="pre">url</span></tt> method of an instance of
+<a class="reference internal" href="settings.html#staticfiles-storage"><em>STATICFILES_STORAGE</em></a> with <tt class="docutils literal"><span class="pre">&quot;css/base.css&quot;</span></tt>. This is especially
+useful when using a non-local storage backend to <a class="reference external" href="https://docs.djangoproject.com/en/dev/howto/static-files/#serving-static-files-from-a-cloud-service-or-cdn">deploy files to a CDN</a>.</p>
+</div>
+<div class="section" id="get-static-prefix">
+<h3>get_static_prefix<a class="headerlink" href="#get-static-prefix" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="staticfiles.templatetags.static.get_static_prefix">
+<tt class="descclassname">templatetags.static.</tt><tt class="descname">get_static_prefix</tt><big>(</big><big>)</big><a class="headerlink" href="#staticfiles.templatetags.static.get_static_prefix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>If you&#8217;re not using <tt class="docutils literal"><span class="pre">RequestContext</span></tt>, or if you need more control over
+exactly where and how <tt class="docutils literal"><span class="pre">STATIC_URL</span></tt> is injected into the template,
+you can use the <tt class="docutils literal"><span class="pre">get_static_prefix</span></tt> template tag instead:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">load</span> <span class="nv">static</span> <span class="cp">%}</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">get_static_prefix</span> <span class="cp">%}</span><span class="s">images/hi.jpg&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>There&#8217;s also a second form you can use to avoid extra processing if you need
+the value multiple times:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">load</span> <span class="nv">static</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">get_static_prefix</span> <span class="k">as</span> <span class="nv">STATIC_PREFIX</span> <span class="cp">%}</span>
+
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">STATIC_PREFIX</span> <span class="cp">}}</span><span class="s">images/hi.jpg&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">STATIC_PREFIX</span> <span class="cp">}}</span><span class="s">images/hi2.jpg&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-media-prefix">
+<h3>get_media_prefix<a class="headerlink" href="#get-media-prefix" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="staticfiles.templatetags.static.get_media_prefix">
+<tt class="descclassname">templatetags.static.</tt><tt class="descname">get_media_prefix</tt><big>(</big><big>)</big><a class="headerlink" href="#staticfiles.templatetags.static.get_media_prefix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Similar to <a class="reference internal" href="#staticfiles.templatetags.static.get_static_prefix" title="staticfiles.templatetags.static.get_static_prefix"><tt class="xref py py-func docutils literal"><span class="pre">get_static_prefix()</span></tt></a> but
+uses the <tt class="docutils literal"><span class="pre">MEDIA_URL</span></tt> setting instead.</p>
+</div>
+</div>
+<div class="section" id="storages">
+<h2>Storages<a class="headerlink" href="#storages" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="staticfilesstorage">
+<h3>StaticFilesStorage<a class="headerlink" href="#staticfilesstorage" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="staticfiles.storage.StaticFilesStorage">
+<em class="property">class </em><tt class="descclassname">storage.</tt><tt class="descname">StaticFilesStorage</tt><a class="headerlink" href="#staticfiles.storage.StaticFilesStorage" title="Permalink to this definition">¶</a></dt>
+<dd><p>A subclass of the <tt class="xref py py-class docutils literal"><span class="pre">FileSystemStorage</span></tt>
+storage backend that uses the <a class="reference internal" href="settings.html#static-root"><em>STATIC_ROOT</em></a> setting as the base
+file system location and the <a class="reference internal" href="settings.html#static-url"><em>STATIC_URL</em></a> setting respectively
+as the base URL.</p>
+<dl class="method">
+<dt id="staticfiles.storage.StaticFilesStorage.post_process">
+<tt class="descname">post_process</tt><big>(</big><em>paths</em>, <em>**options</em><big>)</big><a class="headerlink" href="#staticfiles.storage.StaticFilesStorage.post_process" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="versionadded">
+<span class="versionmodified">New in version 1.1.</span></p>
+<p>This method is called by the <a class="reference internal" href="commands.html#collectstatic"><em>collectstatic</em></a> management command
+after each run and gets passed the paths of found files, as well as the
+command line options.</p>
+<p>The <a class="reference internal" href="#staticfiles.storage.CachedStaticFilesStorage" title="staticfiles.storage.CachedStaticFilesStorage"><tt class="xref py py-class docutils literal"><span class="pre">CachedStaticFilesStorage</span></tt></a> uses this
+behind the scenes to replace the paths with their hashed counterparts
+and update the cache appropriately.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="cachedstaticfilesstorage">
+<h3>CachedStaticFilesStorage<a class="headerlink" href="#cachedstaticfilesstorage" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="staticfiles.storage.CachedStaticFilesStorage">
+<em class="property">class </em><tt class="descclassname">storage.</tt><tt class="descname">CachedStaticFilesStorage</tt><a class="headerlink" href="#staticfiles.storage.CachedStaticFilesStorage" title="Permalink to this definition">¶</a></dt>
+<dd><p class="versionadded">
+<span class="versionmodified">New in version 1.1.</span></p>
+<p>A subclass of the <a class="reference internal" href="#staticfiles.storage.StaticFilesStorage" title="staticfiles.storage.StaticFilesStorage"><tt class="xref py py-class docutils literal"><span class="pre">StaticFilesStorage</span></tt></a>
+storage backend which caches the files it saves by appending the MD5 hash
+of the file&#8217;s content to the filename. For example, the file
+<tt class="docutils literal"><span class="pre">css/styles.css</span></tt> would also be saved as <tt class="docutils literal"><span class="pre">css/styles.55e7cbb9ba48.css</span></tt>.</p>
+<p>The purpose of this storage is to keep serving the old files in case some
+pages still refer to those files, e.g. because they are cached by you or
+a 3rd party proxy server. Additionally, it&#8217;s very helpful if you want to
+apply <a class="reference external" href="http://developer.yahoo.com/performance/rules.html#expires">far future Expires headers</a> to the deployed files to speed up the
+load time for subsequent page visits.</p>
+<p>The storage backend automatically replaces the paths found in the saved
+files matching other saved files with the path of the cached copy (using
+the <a class="reference internal" href="#staticfiles.storage.StaticFilesStorage.post_process" title="staticfiles.storage.StaticFilesStorage.post_process"><tt class="xref py py-meth docutils literal"><span class="pre">post_process()</span></tt></a>
+method). The regular expressions used to find those paths
+(<tt class="docutils literal"><span class="pre">storage.CachedStaticFilesStorage.cached_patterns</span></tt>)
+by default cover the <a class="reference external" href="http://www.w3.org/TR/CSS2/cascade.html#at-import">&#64;import</a> rule and <a class="reference external" href="http://www.w3.org/TR/CSS2/syndata.html#uri">url()</a> statement of <a class="reference external" href="http://www.w3.org/Style/CSS/">Cascading
+Style Sheets</a>. For example, the <tt class="docutils literal"><span class="pre">'css/styles.css'</span></tt> file with the
+content</p>
+<div class="highlight-css+django"><div class="highlight"><pre><span class="k">@import</span> <span class="nt">url</span><span class="o">(</span><span class="s2">&quot;../admin/css/base.css&quot;</span><span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>would be replaced by calling the
+<tt class="xref py py-meth docutils literal"><span class="pre">url()</span></tt>
+method of the <tt class="docutils literal"><span class="pre">CachedStaticFilesStorage</span></tt> storage backend, ultimatively
+saving a <tt class="docutils literal"><span class="pre">'css/styles.55e7cbb9ba48.css'</span></tt> file with the following
+content:</p>
+<div class="highlight-css+django"><div class="highlight"><pre><span class="k">@import</span> <span class="nt">url</span><span class="o">(</span><span class="s2">&quot;/static/admin/css/base.27e20196a850.css&quot;</span><span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>To enable the <tt class="docutils literal"><span class="pre">CachedStaticFilesStorage</span></tt> you have to make sure the
+following requirements are met:</p>
+<ul class="simple">
+<li>the <a class="reference internal" href="settings.html#staticfiles-storage"><em>STATICFILES_STORAGE</em></a> setting is set to
+<tt class="docutils literal"><span class="pre">'staticfiles.storage.CachedStaticFilesStorage'</span></tt></li>
+<li>the <tt class="docutils literal"><span class="pre">DEBUG</span></tt> setting is set to <tt class="xref docutils literal"><span class="pre">False</span></tt></li>
+<li>you use the <tt class="docutils literal"><span class="pre">staticfiles</span></tt>
+<tt class="xref py py-func docutils literal"><span class="pre">static()</span></tt> template
+tag to refer to your static files in your templates</li>
+<li>you&#8217;ve collected all your static files by using the
+<a class="reference internal" href="commands.html#collectstatic"><em>collectstatic</em></a> management command</li>
+</ul>
+<p>Since creating the MD5 hash can be a performance burden to your website
+during runtime, <tt class="docutils literal"><span class="pre">staticfiles</span></tt> will automatically try to cache the
+hashed name for each file path using Django&#8217;s caching framework. If you
+want to override certain options of the cache backend the storage uses,
+simply specify a custom entry in the <tt class="docutils literal"><span class="pre">CACHES</span></tt> setting named
+<tt class="docutils literal"><span class="pre">'staticfiles'</span></tt>. It falls back to using the <tt class="docutils literal"><span class="pre">'default'</span></tt> cache backend.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="static-file-development-view">
+<span id="staticfiles-development-view"></span><h3>Static file development view<a class="headerlink" href="#static-file-development-view" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="staticfiles.staticfiles.views.serve">
+<tt class="descclassname">staticfiles.views.</tt><tt class="descname">serve</tt><big>(</big><em>request</em>, <em>path</em><big>)</big><a class="headerlink" href="#staticfiles.staticfiles.views.serve" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This view function serves static files in development.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>This view will only work if <tt class="docutils literal"><span class="pre">DEBUG</span></tt> is <tt class="xref docutils literal"><span class="pre">True</span></tt>.</p>
+<p class="last">That&#8217;s because this view is <strong>grossly inefficient</strong> and probably
+<strong>insecure</strong>. This is only intended for local development, and should
+<strong>never be used in production</strong>.</p>
+</div>
+<p>This view is automatically enabled by <tt class="docutils literal"><span class="pre">runserver</span></tt> (with a
+<tt class="docutils literal"><span class="pre">DEBUG</span></tt> setting set to <tt class="xref docutils literal"><span class="pre">True</span></tt>). To use the view with a different
+local development server, add the following snippet to the end of your
+primary URL configuration:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
+
+<span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">:</span>
+    <span class="n">urlpatterns</span> <span class="o">+=</span> <span class="n">patterns</span><span class="p">(</span><span class="s">&#39;staticfiles.views&#39;</span><span class="p">,</span>
+        <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^static/(?P&lt;path&gt;.*)$&#39;</span><span class="p">,</span> <span class="s">&#39;serve&#39;</span><span class="p">),</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>Note, the begin of the pattern (<tt class="docutils literal"><span class="pre">r'^static/'</span></tt>) should be your
+<tt class="docutils literal"><span class="pre">STATIC_URL</span></tt> setting.</p>
+</div>
+<div class="section" id="url-patterns-helper">
+<h3>URL patterns helper<a class="headerlink" href="#url-patterns-helper" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="staticfiles.staticfiles.urls.staticfiles_urlpatterns">
+<tt class="descclassname">staticfiles.urls.</tt><tt class="descname">staticfiles_urlpatterns</tt><big>(</big><big>)</big><a class="headerlink" href="#staticfiles.staticfiles.urls.staticfiles_urlpatterns" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This helper function will only work if <tt class="docutils literal"><span class="pre">DEBUG</span></tt> is <tt class="xref docutils literal"><span class="pre">True</span></tt>
+and your <tt class="docutils literal"><span class="pre">STATIC_URL</span></tt> setting is neither empty nor a full
+URL such as <tt class="docutils literal"><span class="pre">http://static.example.com/</span></tt>.</p>
+</div>
+<p>Since configuring the URL patterns is a bit finicky, there&#8217;s also a helper
+function that&#8217;ll do this for you.</p>
+<p>This will return the proper URL pattern for serving static files to your
+already defined pattern list. Use it like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">staticfiles.urls</span> <span class="kn">import</span> <span class="n">staticfiles_urlpatterns</span>
+
+<span class="c"># ... the rest of your URLconf here ...</span>
+
+<span class="n">urlpatterns</span> <span class="o">+=</span> <span class="n">staticfiles_urlpatterns</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Helpers</a><ul>
+<li><a class="reference internal" href="#context-processors">Context processors</a><ul>
+<li><a class="reference internal" href="#the-static-context-processor">The <tt class="docutils literal"><span class="pre">static</span></tt> context processor</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#template-tags">Template tags</a><ul>
+<li><a class="reference internal" href="#static">static</a></li>
+<li><a class="reference internal" href="#get-static-prefix">get_static_prefix</a></li>
+<li><a class="reference internal" href="#get-media-prefix">get_media_prefix</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#storages">Storages</a><ul>
+<li><a class="reference internal" href="#staticfilesstorage">StaticFilesStorage</a></li>
+<li><a class="reference internal" href="#cachedstaticfilesstorage">CachedStaticFilesStorage</a></li>
+<li><a class="reference internal" href="#static-file-development-view">Static file development view</a></li>
+<li><a class="reference internal" href="#url-patterns-helper">URL patterns helper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="commands.html"
+                        title="previous chapter">Management Commands</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="settings.html"
+                        title="next chapter">Settings</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="sources/helpers.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="settings.html" title="Settings"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="commands.html" title="Management Commands"
+             >previous</a> |</li>
+        <li><a href="index.html">django-staticfiles-docs-ja v1.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Tsuyoshi Tokuda.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.8.
+    </div>
+  </body>
+</html>

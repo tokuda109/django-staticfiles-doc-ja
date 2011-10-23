@@ -1,0 +1,301 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Settings &mdash; django-staticfiles-docs-ja v1.1.2 documentation</title>
+    <link rel="stylesheet" href="static/default.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <link rel="top" title="django-staticfiles-docs-ja v1.1.2 documentation" href="index.html" />
+    <link rel="next" title="Changelog" href="changelog.html" />
+    <link rel="prev" title="Helpers" href="helpers.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="changelog.html" title="Changelog"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="helpers.html" title="Helpers"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">django-staticfiles-docs-ja v1.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="settings">
+<h1>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="static-root">
+<span id="id1"></span><h2><tt class="docutils literal"><span class="pre">STATIC_ROOT</span></tt><a class="headerlink" href="#static-root" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Default:</th><td class="field-body"><tt class="docutils literal"><span class="pre">''</span></tt> (Empty string)</td>
+</tr>
+</tbody>
+</table>
+<p>The absolute path to the directory that contains static content after using
+<a class="reference internal" href="commands.html#collectstatic"><em>collectstatic</em></a>.</p>
+<p>Example: <tt class="docutils literal"><span class="pre">&quot;/home/example.com/static/&quot;</span></tt></p>
+<p>When using the <a class="reference internal" href="commands.html#collectstatic"><em>collectstatic</em></a> management command this will be used to
+collect static files into, to be served under the URL specified as
+<a class="reference internal" href="#static-url">STATIC_URL</a>.</p>
+<p>This is a <strong>required setting</strong> to use <a class="reference internal" href="commands.html#collectstatic"><em>collectstatic</em></a> &#8211; unless you&#8217;ve
+overridden <a class="reference internal" href="#staticfiles-storage">STATICFILES_STORAGE</a> and are using a custom storage backend.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This is not a place to store your static files permanently under
+version control; you should do that in directories that will be found by
+your <a class="reference internal" href="#staticfiles-finders">STATICFILES_FINDERS</a> (by default, per-app <tt class="docutils literal"><span class="pre">'static'</span></tt> subdirectories,
+and any directories you include in <a class="reference internal" href="#staticfiles-dirs">STATICFILES_DIRS</a> setting). Files from
+those locations will be collected into <a class="reference internal" href="#static-root">STATIC_ROOT</a>.</p>
+</div>
+<p>See also <a class="reference internal" href="#static-url">STATIC_URL</a>.</p>
+</div>
+<div class="section" id="static-url">
+<span id="id2"></span><h2><tt class="docutils literal"><span class="pre">STATIC_URL</span></tt><a class="headerlink" href="#static-url" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Default:</th><td class="field-body"><tt class="xref docutils literal"><span class="pre">None</span></tt></td>
+</tr>
+</tbody>
+</table>
+<p>URL that handles the files served from <tt class="docutils literal"><span class="pre">STATIC_ROOT</span></tt> and used by
+<tt class="docutils literal"><span class="pre">runserver</span></tt> in development mode (when <tt class="docutils literal"><span class="pre">DEBUG</span> <span class="pre">=</span> <span class="pre">True</span></tt>).</p>
+<p>Example: <tt class="docutils literal"><span class="pre">&quot;/site_media/static/&quot;</span></tt> or <tt class="docutils literal"><span class="pre">&quot;http://static.example.com/&quot;</span></tt></p>
+<p>It must end in a slash if set to a non-empty value.</p>
+<p>See also <a class="reference internal" href="#static-root">STATIC_ROOT</a>.</p>
+</div>
+<div class="section" id="staticfiles-dirs">
+<span id="id3"></span><h2><tt class="docutils literal"><span class="pre">STATICFILES_DIRS</span></tt><a class="headerlink" href="#staticfiles-dirs" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Default:</th><td class="field-body"><tt class="docutils literal"><span class="pre">[]</span></tt></td>
+</tr>
+</tbody>
+</table>
+<p>This setting defines the additional locations the staticfiles app will traverse
+if the <tt class="xref py py-class docutils literal"><span class="pre">FileSystemFinder</span></tt> finder is enabled, e.g. if you use the
+<a class="reference internal" href="commands.html#collectstatic"><em>collectstatic</em></a> or <a class="reference internal" href="commands.html#findstatic"><em>findstatic</em></a> management command or use the
+static file serving view.</p>
+<p>This should be set to a list or tuple of strings that contain full paths to
+your additional files directory(ies) e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STATICFILES_DIRS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s">&quot;/home/special.polls.com/polls/static&quot;</span><span class="p">,</span>
+    <span class="s">&quot;/home/polls.com/polls/static&quot;</span><span class="p">,</span>
+    <span class="s">&quot;/opt/webfiles/common&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="prefixes-optional">
+<h3>Prefixes (optional)<a class="headerlink" href="#prefixes-optional" title="Permalink to this headline">¶</a></h3>
+<p>In case you want to refer to files in one of the locations with an additional
+namespace, you can <strong>OPTIONALLY</strong> provide a prefix as <tt class="docutils literal"><span class="pre">(prefix,</span> <span class="pre">path)</span></tt>
+tuples, e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STATICFILES_DIRS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="c"># ...</span>
+    <span class="p">(</span><span class="s">&quot;downloads&quot;</span><span class="p">,</span> <span class="s">&quot;/opt/webfiles/stats&quot;</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Example:</p>
+<p>Assuming you have <a class="reference internal" href="#static-url">STATIC_URL</a> set <tt class="docutils literal"><span class="pre">'/static/'</span></tt>, the <a class="reference internal" href="commands.html#collectstatic"><em>collectstatic</em></a>
+management command would collect the stats files in a <tt class="docutils literal"><span class="pre">'downloads'</span></tt>
+subdirectory of <a class="reference internal" href="#static-root">STATIC_ROOT</a>.</p>
+<p>This would allow you to refer to the local file
+<tt class="docutils literal"><span class="pre">'/opt/webfiles/stats/polls_20101022.tar.gz'</span></tt> with
+<tt class="docutils literal"><span class="pre">'/static/downloads/polls_20101022.tar.gz'</span></tt> in your templates, e.g.:</p>
+<div class="highlight-python"><pre>&lt;a href="{{ STATIC_URL }}downloads/polls_20101022.tar.gz"&gt;</pre>
+</div>
+</div>
+</div>
+<div class="section" id="staticfiles-excluded-apps">
+<h2><tt class="docutils literal"><span class="pre">STATICFILES_EXCLUDED_APPS</span></tt><a class="headerlink" href="#staticfiles-excluded-apps" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Default:</th><td class="field-body"><tt class="docutils literal"><span class="pre">[]</span></tt></td>
+</tr>
+</tbody>
+</table>
+<p>A sequence of app paths that should be ignored when searching for static
+files:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STATICFILES_EXCLUDED_APPS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s">&#39;annoying.app&#39;</span><span class="p">,</span>
+    <span class="s">&#39;old.company.app&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="staticfiles-storage">
+<span id="id4"></span><h2><tt class="docutils literal"><span class="pre">STATICFILES_STORAGE</span></tt><a class="headerlink" href="#staticfiles-storage" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Default:</th><td class="field-body"><tt class="docutils literal"><span class="pre">'staticfiles.storage.StaticFileStorage'</span></tt></td>
+</tr>
+</tbody>
+</table>
+<p>The file storage engine to use when collecting static files with the
+<a class="reference internal" href="commands.html#collectstatic"><em>collectstatic</em></a> management command.</p>
+</div>
+<div class="section" id="staticfiles-finders">
+<h2><tt class="docutils literal"><span class="pre">STATICFILES_FINDERS</span></tt><a class="headerlink" href="#staticfiles-finders" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Default:</th><td class="field-body"><tt class="docutils literal"><span class="pre">('staticfiles.finders.FileSystemFinder',</span>
+<span class="pre">'staticfiles.finders.AppDirectoriesFinder')</span></tt></td>
+</tr>
+</tbody>
+</table>
+<p>The list of finder backends that know how to find static files in
+various locations.</p>
+<p>The default will find files stored in the <a class="reference internal" href="#staticfiles-dirs">STATICFILES_DIRS</a> setting
+(using <tt class="xref py py-class docutils literal"><span class="pre">staticfiles.finders.FileSystemFinder</span></tt>) and in a
+<tt class="docutils literal"><span class="pre">static</span></tt> subdirectory of each app (using
+<tt class="xref py py-class docutils literal"><span class="pre">staticfiles.finders.AppDirectoriesFinder</span></tt>)</p>
+<p>One finder is disabled by default:
+<tt class="xref py py-class docutils literal"><span class="pre">staticfiles.finders.DefaultStorageFinder</span></tt>. If added to
+your <a class="reference internal" href="#staticfiles-finders">STATICFILES_FINDERS</a> setting, it will look for static files in
+the default file storage as defined by the <tt class="docutils literal"><span class="pre">DEFAULT_FILE_STORAGE</span></tt>
+setting.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When using the <tt class="docutils literal"><span class="pre">AppDirectoriesFinder</span></tt> finder, make sure your apps
+can be found by staticfiles. Simply add the app to the
+<tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> setting of your site.</p>
+</div>
+<p>Static file finders are currently considered a private interface, and this
+interface is thus undocumented.</p>
+<div class="section" id="legacy-media-dir-finder-optional">
+<h3>Legacy &#8216;media&#8217; dir finder (optional)<a class="headerlink" href="#legacy-media-dir-finder-optional" title="Permalink to this headline">¶</a></h3>
+<p>To ease the burden of upgrading a Django project from a non-<tt class="docutils literal"><span class="pre">staticfiles</span></tt>
+setup, the optional finder backend
+<tt class="xref py py-class docutils literal"><span class="pre">staticfiles.finders.LegacyAppDirectoriesFinder</span></tt> is shipped as part of
+<tt class="docutils literal"><span class="pre">django-staticfiles</span></tt>. When added to the <a class="reference internal" href="#staticfiles-finders">STATICFILES_FINDERS</a> setting, it&#8217;ll
+enable <tt class="docutils literal"><span class="pre">staticfiles</span></tt> to use the <tt class="docutils literal"><span class="pre">media</span></tt> directory of the apps in
+<tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt>, similarly
+<tt class="xref py py-class docutils literal"><span class="pre">staticfiles.finders.AppDirectoriesFinder</span></tt>.</p>
+<p>This is especially useful for 3rd party apps that haven&#8217;t been switched over
+to the <tt class="docutils literal"><span class="pre">static</span></tt> directory instead. If you want to use both <tt class="docutils literal"><span class="pre">static</span></tt>
+<strong>and</strong> <tt class="docutils literal"><span class="pre">media</span></tt>, don&#8217;t forget to have
+<tt class="xref py py-class docutils literal"><span class="pre">staticfiles.finders.AppDirectoriesFinder</span></tt> in the
+<a class="reference internal" href="#staticfiles-finders">STATICFILES_FINDERS</a>, too.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Settings</a><ul>
+<li><a class="reference internal" href="#static-root"><tt class="docutils literal"><span class="pre">STATIC_ROOT</span></tt></a></li>
+<li><a class="reference internal" href="#static-url"><tt class="docutils literal"><span class="pre">STATIC_URL</span></tt></a></li>
+<li><a class="reference internal" href="#staticfiles-dirs"><tt class="docutils literal"><span class="pre">STATICFILES_DIRS</span></tt></a><ul>
+<li><a class="reference internal" href="#prefixes-optional">Prefixes (optional)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#staticfiles-excluded-apps"><tt class="docutils literal"><span class="pre">STATICFILES_EXCLUDED_APPS</span></tt></a></li>
+<li><a class="reference internal" href="#staticfiles-storage"><tt class="docutils literal"><span class="pre">STATICFILES_STORAGE</span></tt></a></li>
+<li><a class="reference internal" href="#staticfiles-finders"><tt class="docutils literal"><span class="pre">STATICFILES_FINDERS</span></tt></a><ul>
+<li><a class="reference internal" href="#legacy-media-dir-finder-optional">Legacy &#8216;media&#8217; dir finder (optional)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="helpers.html"
+                        title="previous chapter">Helpers</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="changelog.html"
+                        title="next chapter">Changelog</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="sources/settings.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="changelog.html" title="Changelog"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="helpers.html" title="Helpers"
+             >previous</a> |</li>
+        <li><a href="index.html">django-staticfiles-docs-ja v1.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Tsuyoshi Tokuda.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.8.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,214 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Management Commands &mdash; django-staticfiles-docs-ja v1.1.2 documentation</title>
+    <link rel="stylesheet" href="static/default.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <link rel="top" title="django-staticfiles-docs-ja v1.1.2 documentation" href="index.html" />
+    <link rel="next" title="Helpers" href="helpers.html" />
+    <link rel="prev" title="Differences to django.contrib.staticfiles" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="helpers.html" title="Helpers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Differences to django.contrib.staticfiles"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">django-staticfiles-docs-ja v1.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="management-commands">
+<h1>Management Commands<a class="headerlink" href="#management-commands" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="collectstatic">
+<span id="id1"></span><h2>collectstatic<a class="headerlink" href="#collectstatic" title="Permalink to this headline">¶</a></h2>
+<p>Collects the static files from all installed apps and copies them to the
+<a class="reference internal" href="settings.html#staticfiles-storage"><em>STATICFILES_STORAGE</em></a>.</p>
+<p>Duplicate file names are resolved in a similar way to how template resolution
+works. Files are initially searched for in <a class="reference internal" href="settings.html#staticfiles-dirs"><em>STATICFILES_DIRS</em></a> locations,
+followed by apps in the order specified by the <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> setting.</p>
+<p>Some commonly used options are:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">--noinput</span></tt></dt>
+<dd>Do NOT prompt the user for input of any kind.</dd>
+<dt><tt class="docutils literal"><span class="pre">-i</span> <span class="pre">PATTERN</span></tt> or <tt class="docutils literal"><span class="pre">--ignore=PATTERN</span></tt></dt>
+<dd>Ignore files or directories matching this glob-style pattern. Use multiple
+times to ignore more.</dd>
+<dt><tt class="docutils literal"><span class="pre">-n</span></tt> or <tt class="docutils literal"><span class="pre">--dry-run</span></tt></dt>
+<dd>Do everything except modify the filesystem.</dd>
+<dt><tt class="docutils literal"><span class="pre">-l</span></tt> or <tt class="docutils literal"><span class="pre">--link</span></tt></dt>
+<dd>Create a symbolic link to each file instead of copying.</dd>
+<dt><tt class="docutils literal"><span class="pre">--no-default-ignore</span></tt></dt>
+<dd>Don&#8217;t ignore the common private glob-style patterns <tt class="docutils literal"><span class="pre">'CVS'</span></tt>, <tt class="docutils literal"><span class="pre">'.*'</span></tt>
+and <tt class="docutils literal"><span class="pre">'*~'</span></tt>.</dd>
+</dl>
+<p><tt class="docutils literal"><span class="pre">-c</span></tt> or <tt class="docutils literal"><span class="pre">--clear</span></tt></p>
+<blockquote>
+<div><p class="versionadded">
+<span class="versionmodified">New in version 1.1.</span></p>
+<p>Clear the existing files before trying to copy or link the original file.</p>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">--no-post-process</span></tt></p>
+<blockquote>
+<div><p class="versionadded">
+<span class="versionmodified">New in version 1.1.</span></p>
+<p>Don&#8217;t call the
+<a class="reference internal" href="helpers.html#staticfiles.storage.StaticFilesStorage.post_process" title="staticfiles.storage.StaticFilesStorage.post_process"><tt class="xref py py-meth docutils literal"><span class="pre">post_process()</span></tt></a>
+method of the configured <a class="reference internal" href="settings.html#staticfiles-storage"><em>STATICFILES_STORAGE</em></a> storage backend.</p>
+</div></blockquote>
+<p>For a full list of options, refer to the collectstatic management command help
+by running:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> python manage.py collectstatic --help
+</pre></div>
+</div>
+</div>
+<div class="section" id="findstatic">
+<span id="id2"></span><h2>findstatic<a class="headerlink" href="#findstatic" title="Permalink to this headline">¶</a></h2>
+<p>Searches for one or more relative paths with the enabled finders:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> python manage.py findstatic css/base.css admin/js/core.css
+<span class="go">/home/special.polls.com/core/media/css/base.css</span>
+<span class="go">/home/polls.com/core/media/css/base.css</span>
+<span class="go">/home/polls.com/src/django/contrib/admin/media/js/core.js</span>
+</pre></div>
+</div>
+<p>By default, all matching locations are found. To only return the first match
+for each relative path, use the <tt class="docutils literal"><span class="pre">--first</span></tt> option:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> python manage.py findstatic css/base.css --first
+<span class="go">/home/special.polls.com/core/media/css/base.css</span>
+</pre></div>
+</div>
+<p>This is a debugging aid; it&#8217;ll show you exactly which static file will be
+collected for a given path.</p>
+</div>
+<div class="section" id="runserver">
+<h2>runserver<a class="headerlink" href="#runserver" title="Permalink to this headline">¶</a></h2>
+<p>Overrides the core <tt class="docutils literal"><span class="pre">runserver</span></tt> command if the <tt class="docutils literal"><span class="pre">staticfiles</span></tt> app
+is installed (in <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt>) and adds automatic serving of static
+files and the following new options.</p>
+<p><tt class="docutils literal"><span class="pre">--nostatic</span></tt></p>
+<p>Use the <tt class="docutils literal"><span class="pre">--nostatic</span></tt> option to disable serving of static files with the
+<tt class="docutils literal"><span class="pre">staticfiles</span></tt> app entirely. This option is only available if the
+<tt class="docutils literal"><span class="pre">staticfiles</span></tt> app is in your project&#8217;s <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> setting.</p>
+<p>Example usage:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">django-admin.py runserver --nostatic</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">--insecure</span></tt></p>
+<p>Use the <tt class="docutils literal"><span class="pre">--insecure</span></tt> option to force serving of static files with the
+<tt class="docutils literal"><span class="pre">staticfiles</span></tt> app even if the <tt class="docutils literal"><span class="pre">DEBUG</span></tt> setting is <tt class="xref docutils literal"><span class="pre">False</span></tt>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>By using this you acknowledge the fact that it&#8217;s
+<strong>grossly inefficient</strong> and probably <strong>insecure</strong>.</p>
+<p class="last">This is only intended for local development, should
+<strong>never be used in production</strong> and is only available if the
+<tt class="docutils literal"><span class="pre">staticfiles</span></tt> app is in your project&#8217;s <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> setting.</p>
+</div>
+<p>Example usage:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">django-admin.py runserver --insecure</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Management Commands</a><ul>
+<li><a class="reference internal" href="#collectstatic">collectstatic</a></li>
+<li><a class="reference internal" href="#findstatic">findstatic</a></li>
+<li><a class="reference internal" href="#runserver">runserver</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Differences to <tt class="docutils literal docutils literal"><span class="pre">django.contrib.staticfiles</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="helpers.html"
+                        title="next chapter">Helpers</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="sources/commands.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="helpers.html" title="Helpers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Differences to django.contrib.staticfiles"
+             >previous</a> |</li>
+        <li><a href="index.html">django-staticfiles-docs-ja v1.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Tsuyoshi Tokuda.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.8.
+    </div>
+  </body>
+</html>
