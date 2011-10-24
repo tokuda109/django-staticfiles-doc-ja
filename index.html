@@ -23,7 +23,7 @@
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
     <link rel="top" title="django-staticfiles-docs-ja v1.1.2 documentation" href="#" />
-    <link rel="next" title="Management Commands" href="commands.html" /> 
+    <link rel="next" title="管理コマンド" href="commands.html" /> 
   </head>
   <body>
     <div class="related">
@@ -36,7 +36,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="commands.html" title="Management Commands"
+          <a href="commands.html" title="管理コマンド"
              accesskey="N">next</a> |</li>
         <li><a href="#">django-staticfiles-docs-ja v1.1.2 documentation</a> &raquo;</li> 
       </ul>
@@ -49,22 +49,18 @@
             
   <div class="section" id="django-staticfiles">
 <h1>django-staticfiles<a class="headerlink" href="#django-staticfiles" title="Permalink to this headline">¶</a></h1>
-<p>This is a Django app that provides helpers for serving static files.</p>
-<p>Django developers mostly concern themselves with the dynamic parts of web
-applications &#8211; the views and templates that render new for each request. But
-web applications have other parts: the static media files (images, CSS,
-Javascript, etc.) that are needed to render a complete web page.</p>
-<p>For small projects, this isn&#8217;t a big deal, because you can just keep the media
-somewhere your web server can find it. However, in bigger projects &#8211; especially
-those comprised of multiple apps &#8211; dealing with the multiple sets of static
-files provided by each application starts to get tricky.</p>
-<p>That&#8217;s what <tt class="docutils literal"><span class="pre">staticfiles</span></tt> is for:</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">このドキュメントは <a class="reference external" href="http://readthedocs.org/docs/django-staticfiles/">django-staticfiles</a> の翻訳です。</p>
+</div>
+<p>これは静的ファイルを配信するためのヘルパーを提供するDjangoアプリケーションです。</p>
+<p>ほとんどのDjango開発者は、ウェブアプリケーションでリクエスト毎に新しくビューやテンプレートをレンダリングする動的な部分以外にも、一つのウェブページを全て表示するために画像、CSS、JavaScriptなどの静的なメディアファイルを扱う部分もあるということも考慮しなければいけません。</p>
+<p>小さなプロジェクトでは、これは重要なことではないが、Webサーバが見つけることができる
+場所にメディアファイルを置いておくだけだからです。しかしより大きなプロジェクト(特に複数のアプリケーションで構成される場合)では、個々のアプリケーションが複数の静的ファイルをまとめて使うと複雑になってきます。</p>
+<p>静的ファイルとは何ですか？ :</p>
 <blockquote>
-<div>Collecting static files from each of your Django apps (and any other
-place you specify) into a single location that can easily be served in
-production.</div></blockquote>
-<p>The main website for django-staticfiles is
-<a class="reference external" href="http://github.com/jezdez/django-staticfiles">github.com/jezdez/django-staticfiles</a> where you can also file tickets.</p>
+<div>Djangoアプリケーションの個々の静的ファイルを一つの場所(他に指定した任意の場所)に集めることは開発環境に置くことを簡単にします。</div></blockquote>
+<p>django-staticfilesのウェブサイトは、 <a class="reference external" href="http://github.com/jezdez/django-staticfiles">github.com/jezdez/django-staticfiles</a> で、チケットを作成することもできます。</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>django-staticfiles is now part of Django (since 1.3) as <tt class="docutils literal"><span class="pre">django.contrib.staticfiles</span></tt>.</p>
@@ -77,17 +73,17 @@ profit from the new features and stability.</p>
 staticfiles app since any new feature (additionally to those backported
 from Django) will be released first in django-staticfiles.</p>
 </div>
-<div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h2>インストール<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first">Use your favorite Python packaging tool to install <tt class="docutils literal"><span class="pre">staticfiles</span></tt>
-from <a class="reference external" href="http://pypi.python.org/pypi/django-staticfiles">PyPI</a>, e.g.:</p>
+<li><p class="first"><a class="reference external" href="http://pypi.python.org/pypi/django-staticfiles">PyPI</a> から <tt class="docutils literal"><span class="pre">staticfiles</span></tt> をインストールするための好きなPythonのパッケージツールが使えます。例として</p>
 <div class="highlight-python"><pre>pip install django-staticfiles</pre>
 </div>
-<p>You can also install the <a class="reference external" href="http://github.com/jezdez/django-staticfiles/tarball/develop#egg=django-staticfiles-dev">in-development version</a> of django-staticfiles
-with <tt class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">django-staticfiles==dev</span></tt>.</p>
+<p><tt class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">django-staticfiles==dev</span></tt> とすると、django-staticfilesの <a class="reference external" href="http://github.com/jezdez/django-staticfiles/tarball/develop#egg=django-staticfiles-dev">in-development version</a> をインストールすることができます。</p>
 </li>
-<li><p class="first">Added <tt class="docutils literal"><span class="pre">&quot;staticfiles&quot;</span></tt> to your <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> setting:</p>
+</ul>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> に <tt class="docutils literal"><span class="pre">&quot;staticfiles&quot;</span></tt> を追加して下さい。</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
     <span class="c"># ...</span>
     <span class="s">&quot;staticfiles&quot;</span><span class="p">,</span>
@@ -95,25 +91,26 @@ with <tt class="docutils literal"><span class="pre">pip</span> <span class="pre"
 </pre></div>
 </div>
 </li>
-<li><p class="first">Set your <tt class="docutils literal"><span class="pre">STATIC_URL</span></tt> setting to the URL that handles serving
-static files:</p>
+</ul>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">STATIC_URL</span></tt> に静的ファイルを配信させたいURLを設定して下さい。</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">STATIC_URL</span> <span class="o">=</span> <span class="s">&quot;/static/&quot;</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">In development mode (when <tt class="docutils literal"><span class="pre">DEBUG</span> <span class="pre">=</span> <span class="pre">True</span></tt>) the <tt class="docutils literal"><span class="pre">runserver</span></tt> command will
-automatically serve static files:</p>
-<div class="highlight-python"><pre>python manage.py runserver</pre>
-</div>
+</ul>
+<ul>
+<li><p class="first">開発モード(<tt class="docutils literal"><span class="pre">DEBUG</span> <span class="pre">=</span> <span class="pre">True</span></tt> の時)の時に、 <tt class="docutils literal"><span class="pre">runserver</span></tt> コマンドで静的ファイルを自動的に配信します。</p>
+<blockquote>
+<div><p>python manage.py runserver</p>
+</div></blockquote>
 </li>
-<li><p class="first">Once you are ready to deploy all static files of your site in a central
-directory (<tt class="docutils literal"><span class="pre">STATIC_ROOT</span></tt>) to be served by a real webserver (e.g. <a class="reference external" href="http://httpd.apache.org/">Apache</a>,
-<a class="reference external" href="http://www.cherokee-project.com/">Cherokee</a>, <a class="reference external" href="http://www.lighttpd.net/">Lighttpd</a>, <a class="reference external" href="http://wiki.nginx.org/">Nginx</a> etc.), use the <tt class="docutils literal"><span class="pre">collectstatic</span></tt> management
-command:</p>
+</ul>
+<ul>
+<li><p class="first">サイトの全ての静的ファイルをデプロイする準備ができたら、 <tt class="docutils literal"><span class="pre">collectstatic</span></tt> 管理コマンドを使って下さい。</p>
 <div class="highlight-python"><pre>python manage.py collectstatic</pre>
 </div>
-<p>See the webserver&#8217;s documentation for descriptions how to setup serving
-the deployment directory (<tt class="docutils literal"><span class="pre">STATIC_ROOT</span></tt>).</p>
+<p>デプロイするディレクトリにウェブサーバーのドキュメントを見てください。</p>
 </li>
 <li><p class="first">(optional) In case you use Django&#8217;s admin app, make sure the
 <tt class="docutils literal"><span class="pre">ADMIN_MEDIA_PREFIX</span></tt> setting is set correctly to a subpath of
@@ -124,37 +121,37 @@ the deployment directory (<tt class="docutils literal"><span class="pre">STATIC_
 </li>
 </ul>
 </div>
-<div class="section" id="differences-to-django-contrib-staticfiles">
-<h2>Differences to <tt class="docutils literal"><span class="pre">django.contrib.staticfiles</span></tt><a class="headerlink" href="#differences-to-django-contrib-staticfiles" title="Permalink to this headline">¶</a></h2>
-<p>Features of <tt class="docutils literal"><span class="pre">django-staticfiles</span></tt> which Django&#8217;s <tt class="docutils literal"><span class="pre">staticfiles</span></tt> <strong>doesn&#8217;t</strong>
-support:</p>
+<div class="section" id="django-contrib-staticfiles">
+<h2><tt class="docutils literal"><span class="pre">django.contrib.staticfiles</span></tt> との違い<a class="headerlink" href="#django-contrib-staticfiles" title="Permalink to this headline">¶</a></h2>
+<p>Djangoの <tt class="docutils literal"><span class="pre">staticfiles</span></tt> では <strong>サポートしていない</strong> <tt class="docutils literal"><span class="pre">django-staticfiles</span></tt> の機能:</p>
 <ul class="simple">
-<li>Runs on Django 1.2.X.</li>
-<li><tt class="docutils literal"><span class="pre">STATICFILES_EXCLUDED_APPS</span></tt> settings &#8211; A sequence of dotted app paths
-that should be ignored when searching for static files</li>
-<li>Legacy &#8216;media&#8217; dir file finder &#8211; a staticfiles finder that supports the
-location for static files that a lot of 3rd party apps support
-(<tt class="docutils literal"><span class="pre">staticfiles.finders.LegacyAppDirectoriesFinder</span></tt>).</li>
+<li>Django 1.2.X で動作します。</li>
 </ul>
-<p>See the <a class="reference internal" href="settings.html"><em>Settings</em></a> docs for more information.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">STATICFILES_EXCLUDED_APPS</span></tt> は、静的ファイルを探す時にアプリケーションのパスをドットの区切りから除外するものを指定します。</li>
+</ul>
+<ul class="simple">
+<li>静的ファイルのファインダはほとんどのサードパーティのアプリケーションの静的ファイルの場所をサポートします。</li>
+</ul>
+<p>より詳細な情報は <a class="reference internal" href="settings.html"><em>設定</em></a> を見てください。</p>
 </div>
 <div class="section" id="contents">
 <h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="commands.html">Management Commands</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">管理コマンド</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="commands.html#collectstatic">collectstatic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="commands.html#findstatic">findstatic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="commands.html#runserver">runserver</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="helpers.html">Helpers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="helpers.html#context-processors">Context processors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="helpers.html#template-tags">Template tags</a></li>
-<li class="toctree-l2"><a class="reference internal" href="helpers.html#storages">Storages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="helpers.html">ヘルパー関数</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="helpers.html#id2">コンテキストプロセッサ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="helpers.html#id3">テンプレートタグ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="helpers.html#id4">ストレージ</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">設定</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="settings.html#static-root"><tt class="docutils literal"><span class="pre">STATIC_ROOT</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="settings.html#static-url"><tt class="docutils literal"><span class="pre">STATIC_URL</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="settings.html#staticfiles-dirs"><tt class="docutils literal"><span class="pre">STATICFILES_DIRS</span></tt></a></li>
@@ -163,7 +160,7 @@ location for static files that a lot of 3rd party apps support
 <li class="toctree-l2"><a class="reference internal" href="settings.html#staticfiles-finders"><tt class="docutils literal"><span class="pre">STATICFILES_FINDERS</span></tt></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">変更履歴</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#v1-1-2-2011-08-25">v1.1.2 (2011-08-25)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#v1-1-1-2011-08-22">v1.1.1 (2011-08-22)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#v1-1-2011-08-18">v1.1 (2011-08-18)</a></li>
@@ -194,8 +191,8 @@ location for static files that a lot of 3rd party apps support
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">django-staticfiles</a><ul>
-<li><a class="reference internal" href="#installation">Installation</a></li>
-<li><a class="reference internal" href="#differences-to-django-contrib-staticfiles">Differences to <tt class="docutils literal"><span class="pre">django.contrib.staticfiles</span></tt></a></li>
+<li><a class="reference internal" href="#id2">インストール</a></li>
+<li><a class="reference internal" href="#django-contrib-staticfiles"><tt class="docutils literal"><span class="pre">django.contrib.staticfiles</span></tt> との違い</a></li>
 <li><a class="reference internal" href="#contents">Contents</a><ul>
 </ul>
 </li>
@@ -205,7 +202,7 @@ location for static files that a lot of 3rd party apps support
 
   <h4>Next topic</h4>
   <p class="topless"><a href="commands.html"
-                        title="next chapter">Management Commands</a></p>
+                        title="next chapter">管理コマンド</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="sources/index.txt"
@@ -238,7 +235,7 @@ location for static files that a lot of 3rd party apps support
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="commands.html" title="Management Commands"
+          <a href="commands.html" title="管理コマンド"
              >next</a> |</li>
         <li><a href="#">django-staticfiles-docs-ja v1.1.2 documentation</a> &raquo;</li> 
       </ul>
