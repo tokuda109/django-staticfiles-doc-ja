@@ -56,8 +56,7 @@
 <div class="section" id="collectstatic">
 <span id="id2"></span><h2>collectstatic<a class="headerlink" href="#collectstatic" title="Permalink to this headline">¶</a></h2>
 <p>インストールしている全てのアプリケーションから静的ファイルを集めて <a class="reference internal" href="settings.html#staticfiles-storage"><em>STATICFILES_STORAGE</em></a> にコピーします。</p>
-<p>ファイル名の重複は、似た方法で解決します。
-ファイルは <a class="reference internal" href="settings.html#staticfiles-dirs"><em>STATICFILES_DIRS</em></a> に指定した場所やアプリケーションの場所を最初に検索されます。</p>
+<p>ファイル名の重複は、テンプレートが処理と同じような方法で解決するようにしています。ファイルは <a class="reference internal" href="settings.html#staticfiles-dirs"><em>STATICFILES_DIRS</em></a> に指定した場所や <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> の設定で指定した順にアプリケーションの場所から最初に検索されます。</p>
 <p>一般的に使用するオプションは次のとおりです:</p>
 <p><tt class="docutils literal"><span class="pre">--noinput</span></tt></p>
 <blockquote>
