@@ -1,21 +1,34 @@
 .. include:: ./README.rst
 
-Differences to ``django.contrib.staticfiles``
----------------------------------------------
+.. Differences to ``django.contrib.staticfiles``
+   ---------------------------------------------
 
-Features of ``django-staticfiles`` which Django's ``staticfiles`` **doesn't**
-support:
+``django.contrib.staticfiles`` との違い
+----------------------------------------------------------------
 
-* Runs on Django 1.2.X.
+.. Features of ``django-staticfiles`` which Django's ``staticfiles`` **doesn't**
+   support:
 
-* ``STATICFILES_EXCLUDED_APPS`` settings -- A sequence of dotted app paths
-  that should be ignored when searching for static files
+Djangoの ``staticfiles`` では **サポートしていない** ``django-staticfiles`` の機能:
 
-* Legacy 'media' dir file finder -- a staticfiles finder that supports the
-  location for static files that a lot of 3rd party apps support
-  (``staticfiles.finders.LegacyAppDirectoriesFinder``).
+.. Runs on Django 1.2.X.
 
-See the :doc:`settings` docs for more information.
+* Django 1.2.X で動作します。
+
+.. ``STATICFILES_EXCLUDED_APPS`` settings -- A sequence of dotted app paths
+   that should be ignored when searching for static files
+
+* ``STATICFILES_EXCLUDED_APPS`` は、静的ファイルを探す時にアプリケーションのパスをドットの区切りから除外するものを指定します。
+
+.. Legacy 'media' dir file finder -- a staticfiles finder that supports the
+   location for static files that a lot of 3rd party apps support
+   (``staticfiles.finders.LegacyAppDirectoriesFinder``).
+
+* 静的ファイルのファインダはほとんどのサードパーティのアプリケーションの静的ファイルの場所をサポートします。
+
+.. See the :doc:`settings` docs for more information.
+
+より詳細な情報は :doc:`settings` を見てください。
 
 Contents
 --------
