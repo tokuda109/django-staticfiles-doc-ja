@@ -63,14 +63,13 @@
 </tr>
 </tbody>
 </table>
-<p><a class="reference internal" href="commands.html#collectstatic"><em>collectstatic</em></a> を使って、静的コンテンツを置いているディレクトリの絶対パスを</p>
+<p><a class="reference internal" href="commands.html#collectstatic"><em>collectstatic</em></a> を使うときに、静的コンテンツを置いているディレクトリへの絶対パスを指定します。</p>
 <p>例: <tt class="docutils literal"><span class="pre">&quot;/home/example.com/static/&quot;</span></tt></p>
 <p><a class="reference internal" href="commands.html#collectstatic"><em>collectstatic</em></a> の管理コマンドを使って、静的ファイルを集めた時、STATIC_URL_で指定したURLで配信されることになります。</p>
-<p>これは <a class="reference internal" href="commands.html#collectstatic"><em>collectstatic</em></a> を使うのに <strong>必須</strong> です。
-STATICFILES_STORAGE_とカスタムストレージバックエンド</p>
+<p>これは <a class="reference internal" href="commands.html#collectstatic"><em>collectstatic</em></a> を使うのに <strong>必須</strong> です。STATICFILES_STORAGE_を上書きしない限り、独自のストレージバックエンドが使われます。</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">これはバージョン管理でずっと静的ファイルを保管するための場所ではありません。STATICFILES_FINDERS_で見つけられたディレクトリでそうするべきです。(アプリケーション毎の <tt class="docutils literal"><span class="pre">'static'</span></tt> サブディレクトリと、STATICFILES_DIRS_で設定したディレクトリがデフォルトで)
+<p class="last">これはバージョン管理で静的ファイルをずっと置いておくための場所ではありません。STATICFILES_FINDERS_で見つけられたディレクトリでそうするべきです。(アプリケーション毎の <tt class="docutils literal"><span class="pre">'static'</span></tt> サブディレクトリと、STATICFILES_DIRS_で設定したディレクトリがデフォルトで)
 この場所にあるファイルはSTATIC_ROOT_に集められます。</p>
 </div>
 <p>STATIC_URL_も確認して下さい。</p>
@@ -85,9 +84,9 @@ STATICFILES_STORAGE_とカスタムストレージバックエンド</p>
 </tr>
 </tbody>
 </table>
-<p><tt class="docutils literal"><span class="pre">STATIC_ROOT</span></tt> から配信されたファイルを処理するURLと開発モード(<tt class="docutils literal"><span class="pre">DEBUG</span> <span class="pre">=</span> <span class="pre">True</span></tt> の時)で、 <tt class="docutils literal"><span class="pre">runserver</span></tt> を使って</p>
+<p>開発モード(<tt class="docutils literal"><span class="pre">DEBUG</span> <span class="pre">=</span> <span class="pre">True</span></tt> の時)で、 <tt class="docutils literal"><span class="pre">runserver</span></tt> を使った時に <tt class="docutils literal"><span class="pre">STATIC_ROOT</span></tt> から配信されたファイルを処理するためのURLを指定します。</p>
 <p>Example: <tt class="docutils literal"><span class="pre">&quot;/site_media/static/&quot;</span></tt> or <tt class="docutils literal"><span class="pre">&quot;http://static.example.com/&quot;</span></tt></p>
-<p>値を空白にしない場合はスラッシュを最後にしなければならない。</p>
+<p>値を空白にしない場合はスラッシュを最後にしなければいけません。</p>
 <p>STATIC_ROOT_も確認して下さい。</p>
 </div>
 <div class="section" id="staticfiles-dirs">
@@ -121,9 +120,7 @@ STATICFILES_STORAGE_とカスタムストレージバックエンド</p>
 </div>
 <p>例:</p>
 <p>STATIC_URL_に <tt class="docutils literal"><span class="pre">'/static/'</span></tt> と設定しているものとすると、 <a class="reference internal" href="commands.html#collectstatic"><em>collectstatic</em></a> 管理コマンドはSTATIC_ROOT_のサブディレクトリ <tt class="docutils literal"><span class="pre">'downloads'</span></tt> にある静的ファイルを集めるでしょう。</p>
-<p>This would allow you to refer to the local file
-<tt class="docutils literal"><span class="pre">'/opt/webfiles/stats/polls_20101022.tar.gz'</span></tt> with
-<tt class="docutils literal"><span class="pre">'/static/downloads/polls_20101022.tar.gz'</span></tt> in your templates, e.g.:</p>
+<p>テンプレートで <tt class="docutils literal"><span class="pre">'/static/downloads/polls_20101022.tar.gz'</span></tt> とすると、ローカルファイルの <tt class="docutils literal"><span class="pre">'/opt/webfiles/stats/polls_20101022.tar.gz'</span></tt> を参照するようになります。例として</p>
 <div class="highlight-python"><pre>&lt;a href="{{ STATIC_URL }}downloads/polls_20101022.tar.gz"&gt;</pre>
 </div>
 </div>
@@ -171,9 +168,8 @@ STATICFILES_STORAGE_とカスタムストレージバックエンド</p>
 </table>
 <p>様々な場所にある静的ファイルをどのように探索するかを処理するファインダバックエンドのリストです。</p>
 <p>デフォルトでSTATICFILES_DIRS_で設定した場所(<cite>staticfiles.finders.FileSystemFinder</cite> を使って) と、個々のアプリケーション内の <tt class="docutils literal"><span class="pre">static</span></tt> サブディレクトリ内(<tt class="xref py py-class docutils literal"><span class="pre">staticfiles.finders.AppDirectoriesFinder</span></tt> を使って)に置かれているファイルを探します。</p>
-<p><tt class="xref py py-class docutils literal"><span class="pre">staticfiles.finders.DefaultStorageFinder</span></tt>
-settings.pyでSTATICFILES_FINDERS_を追加する場合、 <tt class="docutils literal"><span class="pre">DEFAULT_FILE_STORAGE</span></tt> で
-指定されたデフォルトのファイルストレージ内の静的ファイルを探します。</p>
+<p>デフォルトで <tt class="xref py py-class docutils literal"><span class="pre">staticfiles.finders.DefaultStorageFinder</span></tt> は無効化されています。
+STATICFILES_FINDERS_に設定を追加する場合、 <tt class="docutils literal"><span class="pre">DEFAULT_FILE_STORAGE</span></tt> の設定で指定されたデフォルトのファイルストレージ内の静的ファイルを探します。</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><tt class="docutils literal"><span class="pre">AppDirectoriesFinder</span></tt> ファインダを使う時は、staticfilesによって確実に見つけることができます。サイトの <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> の設定にアプリケーションを追加するのは簡単です。</p>
@@ -181,14 +177,10 @@ settings.pyでSTATICFILES_FINDERS_を追加する場合、 <tt class="docutils l
 <p>静的ファイルのファインダは現在非公開で、ドキュメント化されていません。</p>
 <div class="section" id="media">
 <h3>古い &#8216;media&#8217; ディレクトリのファインダ(オプション)<a class="headerlink" href="#media" title="Permalink to this headline">¶</a></h3>
-<p>To ease the burden of upgrading a Django project from a non-<tt class="docutils literal"><span class="pre">staticfiles</span></tt>
-setup, the optional finder backend
-<tt class="xref py py-class docutils literal"><span class="pre">staticfiles.finders.LegacyAppDirectoriesFinder</span></tt> is shipped as part of
-<tt class="docutils literal"><span class="pre">django-staticfiles</span></tt>. When added to the <a class="reference internal" href="#staticfiles-finders">STATICFILES_FINDERS</a> setting, it&#8217;ll
-enable <tt class="docutils literal"><span class="pre">staticfiles</span></tt> to use the <tt class="docutils literal"><span class="pre">media</span></tt> directory of the apps in
-<tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt>, similarly
-<tt class="xref py py-class docutils literal"><span class="pre">staticfiles.finders.AppDirectoriesFinder</span></tt>.</p>
-<p>これは、サードパーティのアプリケーションが <tt class="docutils literal"><span class="pre">static</span></tt> ディレクトリに変更されていない場合に有効です。</p>
+<p><tt class="docutils literal"><span class="pre">staticfiles</span></tt> を使っていないDjangoプロジェクトのアップグレードの負担を軽減するために、オプションの <tt class="xref py py-class docutils literal"><span class="pre">staticfiles.finders.LegacyAppDirectoriesFinder</span></tt> ファインダーバックエンドは <tt class="docutils literal"><span class="pre">django-staticfiles</span></tt> の一部として追加されました。
+<a class="reference internal" href="#staticfiles-finders">STATICFILES_FINDERS</a> に設定を追加した時に、 <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> にあるアプリケーションの <tt class="docutils literal"><span class="pre">media</span></tt> を使うために <tt class="docutils literal"><span class="pre">staticfiles</span></tt> を <tt class="xref py py-class docutils literal"><span class="pre">staticfiles.finders.AppDirectoriesFinder</span></tt> と同じように有効にして下さい。</p>
+<p>これは、サードパーティのアプリケーションが <tt class="docutils literal"><span class="pre">media</span></tt> の代わりに <tt class="docutils literal"><span class="pre">static</span></tt> ディレクトリを使うように切り替えられていない場合は特に有効です。
+<tt class="docutils literal"><span class="pre">static</span></tt> と <tt class="docutils literal"><span class="pre">media</span></tt> の両方を使う場合、STATICFILES_FINDERS_に <tt class="xref py py-class docutils literal"><span class="pre">staticfiles.finders.AppDirectoriesFinder</span></tt> を入れるのも忘れないで下さい。</p>
 </div>
 </div>
 </div>
