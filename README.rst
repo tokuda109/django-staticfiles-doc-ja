@@ -38,17 +38,30 @@ django-staticfiles
 
 django-staticfilesのウェブサイトは、 `github.com/jezdez/django-staticfiles`_ で、チケットを作成することもできます。
 
-.. note:: django-staticfiles is now part of Django (since 1.3) as ``django.contrib.staticfiles``.
+.. note::
 
-   The django-staticfiles 0.3.X series will only receive security and data los
-   bug fixes after the release of django-staticfiles 1.0. Any Django 1.2.X
-   project using django-staticfiles 0.3.X and lower should be upgraded to use
-   either Django >= 1.3's staticfiles app or django-staticfiles >= 1.0 to
-   profit from the new features and stability.
+   .. django-staticfiles is now part of Django (since 1.3) as ``django.contrib.staticfiles``.
 
-   You may want to chose to use django-staticfiles instead of Django's own
-   staticfiles app since any new feature (additionally to those backported
-   from Django) will be released first in django-staticfiles.
+      The django-staticfiles 0.3.X series will only receive security and data los
+      bug fixes after the release of django-staticfiles 1.0. Any Django 1.2.X
+      project using django-staticfiles 0.3.X and lower should be upgraded to use
+      either Django >= 1.3's staticfiles app or django-staticfiles >= 1.0 to
+      profit from the new features and stability.
+
+      You may want to chose to use django-staticfiles instead of Django's own
+      staticfiles app since any new feature (additionally to those backported
+      from Django) will be released first in django-staticfiles.
+
+   django-staticfilesはDjango 1.3から ``django.contrib.staticfiles`` としてDjangoの一部になりました。
+
+   django-staticfilesの0.3.Xは1.0のリリース後はセキュリティとデータがなくなるバグのバグフィックスしか行いません。
+   Django 1.2.X で 0.3.X 以下のバージョンを使っている場合は、django-staticfilesのバージョン1.0以上を使うかDjango 1.3のstaticfilesにアップグレードしてください。
+
+   django-staticfilesで先に新しい機能がリリースされるので、django-staticfilesを使いたい場合は、Django付属のstaticfilesアプリケーションの代わりにdjango-staticfilesを使うことができます。
+
+
+
+   
 
 .. Installation
    ------------

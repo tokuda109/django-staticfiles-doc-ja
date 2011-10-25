@@ -170,11 +170,10 @@ v0.3.3 (2010-12-23)
       staticfiles app since any new feature (additionally to those backported
       from Django) will be released first in django-staticfiles.
 
-   django-staticfilesはDjango 1.3でcontribアプリケーションとして追加されました。
+   django-staticfilesはDjango 1.3から ``django.contrib.staticfiles`` としてDjangoの一部になりました。
 
    django-staticfilesの0.3.Xは1.0のリリース後はセキュリティとデータがなくなるバグのバグフィックスしか行いません。
-   Django 1.2.X で 0.3.X 以下のバージョンを使っている場合は、
-   django-staticfilesのバージョン1.0以上を使うかDjango 1.3のstaticfilesにアップグレードしてください。
+   Django 1.2.X で 0.3.X 以下のバージョンを使っている場合は、django-staticfilesのバージョン1.0以上を使うかDjango 1.3のstaticfilesにアップグレードしてください。
 
    django-staticfilesで先に新しい機能がリリースされるので、django-staticfilesを使いたい場合は、Django付属のstaticfilesアプリケーションの代わりにdjango-staticfilesを使うことができます。
 
