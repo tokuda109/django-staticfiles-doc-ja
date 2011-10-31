@@ -13,30 +13,29 @@ django-staticfiles
    web applications have other parts: the static media files (images, CSS,
    Javascript, etc.) that are needed to render a complete web page.
 
-ほとんどのDjango開発者は、ウェブアプリケーションでリクエスト毎に新しくビューやテンプレートをレンダリングする動的な部分以外にも、一つのウェブページを全て表示するために画像、CSS、JavaScriptなどの静的なメディアファイルを扱う部分もあるということも考慮しなければいけません。
+ほとんどのDjango開発者は、ウェブアプリケーションにはリクエスト毎に新しくビューやテンプレートをレンダリングする動的な部分があって、それ以外にも、一つのウェブページの全て表示するためには画像、CSS、JavaScriptなどの静的なメディアファイルを扱う部分もあるということも考慮しなければいけません。
 
 .. For small projects, this isn't a big deal, because you can just keep the media
    somewhere your web server can find it. However, in bigger projects -- especially
    those comprised of multiple apps -- dealing with the multiple sets of static
    files provided by each application starts to get tricky.
 
-小さなプロジェクトでは、これは重要なことではないが、Webサーバが見つけることができる
-場所にメディアファイルを置いておくだけだからです。しかしより大きなプロジェクト(特に複数のアプリケーションで構成される場合)では、個々のアプリケーションが複数の静的ファイルをまとめて使うと複雑になってきます。
+小さなプロジェクトでは、これは重要なことではない。なぜなら、Webサーバがメディアファイルの置いている場所を見つけることができるように置いておくだけだからです。しかしより大きなプロジェクト(特に複数のアプリケーションで構成される場合)では、個々のアプリケーションが複数の静的ファイルをまとめて使うと複雑になってきます。
 
 .. That's what ``staticfiles`` is for:
 
-静的ファイルとは何ですか？ :
+静的ファイルとは何を指しているのでしょう？ :
 
   .. Collecting static files from each of your Django apps (and any other
      place you specify) into a single location that can easily be served in
      production.
 
-  Djangoアプリケーションの個々の静的ファイルを一つの場所(他に指定した任意の場所)に集めることは開発環境に置くことを簡単にします。
+  Djangoアプリケーションの個々の静的ファイルを一つの場所(他に指定した任意の場所)に集めることは本番環境で静的ファイルを配信することが容易になります。
 
 .. The main website for django-staticfiles is
    `github.com/jezdez/django-staticfiles`_ where you can also file tickets.
 
-django-staticfilesのウェブサイトは、 `github.com/jezdez/django-staticfiles`_ で、チケットを作成することもできます。
+django-staticfilesのメインのウェブサイトは `github.com/jezdez/django-staticfiles`_ で、チケットを作成することもできます。
 
 .. note::
 
@@ -58,10 +57,6 @@ django-staticfilesのウェブサイトは、 `github.com/jezdez/django-staticfi
    Django 1.2.X で 0.3.X 以下のバージョンを使っている場合は、django-staticfilesのバージョン1.0以上を使うかDjango 1.3のstaticfilesにアップグレードしてください。
 
    django-staticfilesで先に新しい機能がリリースされるので、django-staticfilesを使いたい場合は、Django付属のstaticfilesアプリケーションの代わりにdjango-staticfilesを使うことができます。
-
-
-
-   
 
 .. Installation
    ------------
@@ -116,11 +111,13 @@ django-staticfilesのウェブサイトは、 `github.com/jezdez/django-staticfi
   .. See the webserver's documentation for descriptions how to setup serving
      the deployment directory (``STATIC_ROOT``).
 
-  デプロイするディレクトリにウェブサーバーのドキュメントを見てください。
+  デプロイするディレクトリ(``STATIC_ROOT``)に配信するための設定方法は、ウェブサーバーのドキュメントを見てください。
 
-- (optional) In case you use Django's admin app, make sure the
-  ``ADMIN_MEDIA_PREFIX`` setting is set correctly to a subpath of
-  ``STATIC_URL``::
+.. (optional) In case you use Django's admin app, make sure the
+   ``ADMIN_MEDIA_PREFIX`` setting is set correctly to a subpath of
+   ``STATIC_URL``::
+
+- (オプション) Djangoのadminアプリケーションを使う場合は、 ``ADMIN_MEDIA_PREFIX`` の設定を ``STATIC_URL`` のサブパスに正しく設定して下さい。 ::
 
      ADMIN_MEDIA_PREFIX = STATIC_URL + "admin/"
 

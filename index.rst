@@ -24,7 +24,7 @@ Djangoの ``staticfiles`` では **サポートしていない** ``django-static
    location for static files that a lot of 3rd party apps support
    (``staticfiles.finders.LegacyAppDirectoriesFinder``).
 
-* 静的ファイルのファインダはほとんどのサードパーティのアプリケーションの静的ファイルの場所をサポートします。
+* 静的ファイルのファインダは、ほとんどのサードパーティのアプリケーションの静的ファイルの場所をサポートします。
 
 .. See the :doc:`settings` docs for more information.
 

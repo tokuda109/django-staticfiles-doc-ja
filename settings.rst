@@ -16,7 +16,7 @@
 .. The absolute path to the directory that contains static content after using
    :ref:`collectstatic`.
 
-:ref:`collectstatic` を使って、静的コンテンツを置いているディレクトリの絶対パスを
+:ref:`collectstatic` を使うときに、静的コンテンツを置いているディレクトリへの絶対パスを指定します。
 
 .. Example: ``"/home/example.com/static/"``
 
@@ -31,8 +31,7 @@
 .. This is a **required setting** to use :ref:`collectstatic` -- unless you've
    overridden STATICFILES_STORAGE_ and are using a custom storage backend.
 
-これは :ref:`collectstatic` を使うのに **必須** です。
-STATICFILES_STORAGE_とカスタムストレージバックエンド
+これは :ref:`collectstatic` を使うのに **必須** です。STATICFILES_STORAGE_を上書きしない限り、独自のストレージバックエンドが使われます。
 
 .. warning::
 
@@ -42,7 +41,7 @@ STATICFILES_STORAGE_とカスタムストレージバックエンド
       and any directories you include in STATICFILES_DIRS_ setting). Files from
       those locations will be collected into STATIC_ROOT_.
 
-   これはバージョン管理でずっと静的ファイルを保管するための場所ではありません。STATICFILES_FINDERS_で見つけられたディレクトリでそうするべきです。(アプリケーション毎の ``'static'`` サブディレクトリと、STATICFILES_DIRS_で設定したディレクトリがデフォルトで)
+   これはバージョン管理で静的ファイルをずっと置いておくための場所ではありません。STATICFILES_FINDERS_で見つけられたディレクトリでそうするべきです。(アプリケーション毎の ``'static'`` サブディレクトリと、STATICFILES_DIRS_で設定したディレクトリがデフォルトで)
    この場所にあるファイルはSTATIC_ROOT_に集められます。
 
 .. See also STATIC_URL_.
@@ -59,13 +58,13 @@ STATIC_URL_も確認して下さい。
 .. URL that handles the files served from ``STATIC_ROOT`` and used by
    ``runserver`` in development mode (when ``DEBUG = True``).
 
-``STATIC_ROOT`` から配信されたファイルを処理するURLと開発モード(``DEBUG = True`` の時)で、 ``runserver`` を使って
+開発モード(``DEBUG = True`` の時)で、 ``runserver`` を使った時に ``STATIC_ROOT`` から配信されたファイルを処理するためのURLを指定します。
 
 Example: ``"/site_media/static/"`` or ``"http://static.example.com/"``
 
 .. It must end in a slash if set to a non-empty value.
 
-値を空白にしない場合はスラッシュを最後にしなければならない。
+値を空白にしない場合はスラッシュを最後にしなければいけません。
 
 .. See also STATIC_ROOT_.
 
@@ -124,9 +123,11 @@ STATIC_ROOT_も確認して下さい。
 
 STATIC_URL_に ``'/static/'`` と設定しているものとすると、 :ref:`collectstatic` 管理コマンドはSTATIC_ROOT_のサブディレクトリ ``'downloads'`` にある静的ファイルを集めるでしょう。
 
-This would allow you to refer to the local file
-``'/opt/webfiles/stats/polls_20101022.tar.gz'`` with
-``'/static/downloads/polls_20101022.tar.gz'`` in your templates, e.g.::
+.. This would allow you to refer to the local file
+   ``'/opt/webfiles/stats/polls_20101022.tar.gz'`` with
+   ``'/static/downloads/polls_20101022.tar.gz'`` in your templates, e.g.::
+
+テンプレートで ``'/static/downloads/polls_20101022.tar.gz'`` とすると、ローカルファイルの ``'/opt/webfiles/stats/polls_20101022.tar.gz'`` を参照するようになります。例として ::
 
     <a href="{{ STATIC_URL }}downloads/polls_20101022.tar.gz">
 
@@ -181,9 +182,8 @@ This would allow you to refer to the local file
    the default file storage as defined by the ``DEFAULT_FILE_STORAGE``
    setting.
 
-:class:`staticfiles.finders.DefaultStorageFinder`
-settings.pyでSTATICFILES_FINDERS_を追加する場合、 ``DEFAULT_FILE_STORAGE`` で
-指定されたデフォルトのファイルストレージ内の静的ファイルを探します。
+デフォルトで :class:`staticfiles.finders.DefaultStorageFinder` は無効化されています。
+STATICFILES_FINDERS_に設定を追加する場合、 ``DEFAULT_FILE_STORAGE`` の設定で指定されたデフォルトのファイルストレージ内の静的ファイルを探します。
 
 .. note::
 
@@ -212,9 +212,8 @@ settings.pyでSTATICFILES_FINDERS_を追加する場合、 ``DEFAULT_FILE_STORAG
    ``INSTALLED_APPS``, similarly
    :class:`staticfiles.finders.AppDirectoriesFinder`.
 
-``staticfiles`` を使っていないDjangoのアップグレードの負担を軽減すること
-オプションの :class:`staticfiles.finders.LegacyAppDirectoriesFinder` ファインダーバックエンドは ``django-staticfiles`` の一部として追加されました。
-STATICFILES_FINDERS_ の設定を追加した時に、 ``INSTALLED_APPS`` にあるアプリケーションの ``media`` を使うために ``staticfiles`` を有効にして下さい。 :class:`staticfiles.finders.AppDirectoriesFinder` と同じように
+``staticfiles`` を使っていないDjangoプロジェクトのアップグレードの負担を軽減するために、オプションの :class:`staticfiles.finders.LegacyAppDirectoriesFinder` ファインダーバックエンドは ``django-staticfiles`` の一部として追加されました。
+STATICFILES_FINDERS_ に設定を追加した時に、 ``INSTALLED_APPS`` にあるアプリケーションの ``media`` を使うために ``staticfiles`` を :class:`staticfiles.finders.AppDirectoriesFinder` と同じように有効にして下さい。
 
 .. This is especially useful for 3rd party apps that haven't been switched over
    to the ``static`` directory instead. If you want to use both ``static``
@@ -222,4 +221,5 @@ STATICFILES_FINDERS_ の設定を追加した時に、 ``INSTALLED_APPS`` にあ
    :class:`staticfiles.finders.AppDirectoriesFinder` in the
    STATICFILES_FINDERS_, too.
 
-これは、サードパーティのアプリケーションが ``static`` ディレクトリに変更されていない場合に有効です。
+これは、サードパーティのアプリケーションが ``media`` の代わりに ``static`` ディレクトリを使うように切り替えられていない場合は特に有効です。
+``static`` と ``media`` の両方を使う場合、STATICFILES_FINDERS_に :class:`staticfiles.finders.AppDirectoriesFinder` を入れるのも忘れないで下さい。
