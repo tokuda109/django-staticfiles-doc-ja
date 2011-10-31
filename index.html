@@ -54,13 +54,12 @@
 <p class="last">このドキュメントは <a class="reference external" href="http://readthedocs.org/docs/django-staticfiles/">django-staticfiles</a> の翻訳です。</p>
 </div>
 <p>これは静的ファイルを配信するためのヘルパーを提供するDjangoアプリケーションです。</p>
-<p>ほとんどのDjango開発者は、ウェブアプリケーションでリクエスト毎に新しくビューやテンプレートをレンダリングする動的な部分以外にも、一つのウェブページを全て表示するために画像、CSS、JavaScriptなどの静的なメディアファイルを扱う部分もあるということも考慮しなければいけません。</p>
-<p>小さなプロジェクトでは、これは重要なことではないが、Webサーバが見つけることができる
-場所にメディアファイルを置いておくだけだからです。しかしより大きなプロジェクト(特に複数のアプリケーションで構成される場合)では、個々のアプリケーションが複数の静的ファイルをまとめて使うと複雑になってきます。</p>
-<p>静的ファイルとは何ですか？ :</p>
+<p>ほとんどのDjango開発者は、ウェブアプリケーションにはリクエスト毎に新しくビューやテンプレートをレンダリングする動的な部分があって、それ以外にも、一つのウェブページの全て表示するためには画像、CSS、JavaScriptなどの静的なメディアファイルを扱う部分もあるということも考慮しなければいけません。</p>
+<p>小さなプロジェクトでは、これは重要なことではない。なぜなら、Webサーバがメディアファイルの置いている場所を見つけることができるように置いておくだけだからです。しかしより大きなプロジェクト(特に複数のアプリケーションで構成される場合)では、個々のアプリケーションが複数の静的ファイルをまとめて使うと複雑になってきます。</p>
+<p>静的ファイルとは何を指しているのでしょう？ :</p>
 <blockquote>
-<div>Djangoアプリケーションの個々の静的ファイルを一つの場所(他に指定した任意の場所)に集めることは開発環境に置くことを簡単にします。</div></blockquote>
-<p>django-staticfilesのウェブサイトは、 <a class="reference external" href="http://github.com/jezdez/django-staticfiles">github.com/jezdez/django-staticfiles</a> で、チケットを作成することもできます。</p>
+<div>Djangoアプリケーションの個々の静的ファイルを一つの場所(他に指定した任意の場所)に集めることは本番環境で静的ファイルを配信することが容易になります。</div></blockquote>
+<p>django-staticfilesのメインのウェブサイトは <a class="reference external" href="http://github.com/jezdez/django-staticfiles">github.com/jezdez/django-staticfiles</a> で、チケットを作成することもできます。</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>django-staticfilesはDjango 1.3から <tt class="docutils literal"><span class="pre">django.contrib.staticfiles</span></tt> としてDjangoの一部になりました。</p>
@@ -105,11 +104,11 @@ Django 1.2.X で 0.3.X 以下のバージョンを使っている場合は、dja
 <li><p class="first">サイトの全ての静的ファイルをデプロイする準備ができたら、 <tt class="docutils literal"><span class="pre">collectstatic</span></tt> 管理コマンドを使って下さい。</p>
 <div class="highlight-python"><pre>python manage.py collectstatic</pre>
 </div>
-<p>デプロイするディレクトリにウェブサーバーのドキュメントを見てください。</p>
+<p>デプロイするディレクトリ(<tt class="docutils literal"><span class="pre">STATIC_ROOT</span></tt>)に配信するための設定方法は、ウェブサーバーのドキュメントを見てください。</p>
 </li>
-<li><p class="first">(optional) In case you use Django&#8217;s admin app, make sure the
-<tt class="docutils literal"><span class="pre">ADMIN_MEDIA_PREFIX</span></tt> setting is set correctly to a subpath of
-<tt class="docutils literal"><span class="pre">STATIC_URL</span></tt>:</p>
+</ul>
+<ul>
+<li><p class="first">(オプション) Djangoのadminアプリケーションを使う場合は、 <tt class="docutils literal"><span class="pre">ADMIN_MEDIA_PREFIX</span></tt> の設定を <tt class="docutils literal"><span class="pre">STATIC_URL</span></tt> のサブパスに正しく設定して下さい。</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">ADMIN_MEDIA_PREFIX</span> <span class="o">=</span> <span class="n">STATIC_URL</span> <span class="o">+</span> <span class="s">&quot;admin/&quot;</span>
 </pre></div>
 </div>
@@ -126,7 +125,7 @@ Django 1.2.X で 0.3.X 以下のバージョンを使っている場合は、dja
 <li><tt class="docutils literal"><span class="pre">STATICFILES_EXCLUDED_APPS</span></tt> は、静的ファイルを探す時にアプリケーションのパスをドットの区切りから除外するものを指定します。</li>
 </ul>
 <ul class="simple">
-<li>静的ファイルのファインダはほとんどのサードパーティのアプリケーションの静的ファイルの場所をサポートします。</li>
+<li>静的ファイルのファインダは、ほとんどのサードパーティのアプリケーションの静的ファイルの場所をサポートします。</li>
 </ul>
 <p>より詳細な情報は <a class="reference internal" href="settings.html"><em>設定</em></a> を見てください。</p>
 </div>

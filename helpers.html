@@ -143,35 +143,18 @@
 <em class="property">class </em><tt class="descclassname">storage.</tt><tt class="descname">CachedStaticFilesStorage</tt><a class="headerlink" href="#staticfiles.storage.CachedStaticFilesStorage" title="Permalink to this definition">¶</a></dt>
 <dd><p class="versionadded">
 <span class="versionmodified">New in version 1.1.</span></p>
-<p>A subclass of the <a class="reference internal" href="#staticfiles.storage.StaticFilesStorage" title="staticfiles.storage.StaticFilesStorage"><tt class="xref py py-class docutils literal"><span class="pre">StaticFilesStorage</span></tt></a>
-storage backend which caches the files it saves by appending the MD5 hash
-of the file&#8217;s content to the filename. For example, the file
-<tt class="docutils literal"><span class="pre">css/styles.css</span></tt> would also be saved as <tt class="docutils literal"><span class="pre">css/styles.55e7cbb9ba48.css</span></tt>.</p>
-<p>The purpose of this storage is to keep serving the old files in case some
-pages still refer to those files, e.g. because they are cached by you or
-a 3rd party proxy server. Additionally, it&#8217;s very helpful if you want to
-apply <a class="reference external" href="http://developer.yahoo.com/performance/rules.html#expires">far future Expires headers</a> to the deployed files to speed up the
-load time for subsequent page visits.</p>
-<p>The storage backend automatically replaces the paths found in the saved
-files matching other saved files with the path of the cached copy (using
-the <a class="reference internal" href="#staticfiles.storage.StaticFilesStorage.post_process" title="staticfiles.storage.StaticFilesStorage.post_process"><tt class="xref py py-meth docutils literal"><span class="pre">post_process()</span></tt></a>
-method). The regular expressions used to find those paths
-(<tt class="docutils literal"><span class="pre">storage.CachedStaticFilesStorage.cached_patterns</span></tt>)
-by default cover the <a class="reference external" href="http://www.w3.org/TR/CSS2/cascade.html#at-import">&#64;import</a> rule and <a class="reference external" href="http://www.w3.org/TR/CSS2/syndata.html#uri">url()</a> statement of <a class="reference external" href="http://www.w3.org/Style/CSS/">Cascading
-Style Sheets</a>. For example, the <tt class="docutils literal"><span class="pre">'css/styles.css'</span></tt> file with the
-content</p>
+<p><a class="reference internal" href="#staticfiles.storage.StaticFilesStorage" title="staticfiles.storage.StaticFilesStorage"><tt class="xref py py-class docutils literal"><span class="pre">StaticFilesStorage</span></tt></a> クラスのサブクラスはファイルの内容のMD5ハッシュをファイル名に付けて保存して、ファイルをキャッシュします。例えば、 <tt class="docutils literal"><span class="pre">css/styles.css</span></tt> ファイルは、 <tt class="docutils literal"><span class="pre">css/styles.55e7cbb9ba48.css</span></tt> として保存されます。</p>
+<p>このストレージの目的は、あるページにおいて、サードパーティのプロキシサーバーによってキャッシュされた古いファイルを参照してファイルを配信し続けることです。さらに、訪問済みのページで読み込み時間をスピードアップするためにデプロイしたファイルに <a class="reference external" href="http://developer.yahoo.com/performance/rules.html#expires">far future Expires headers</a> を適用したい場合は、非常に便利です。</p>
+<p>ストレージバックエンドは自動的に保管しているファイルを探すパスを書き換えます。
+正規表現を使うと</p>
 <div class="highlight-css+django"><div class="highlight"><pre><span class="k">@import</span> <span class="nt">url</span><span class="o">(</span><span class="s2">&quot;../admin/css/base.css&quot;</span><span class="o">)</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>would be replaced by calling the
-<tt class="xref py py-meth docutils literal"><span class="pre">url()</span></tt>
-method of the <tt class="docutils literal"><span class="pre">CachedStaticFilesStorage</span></tt> storage backend, ultimatively
-saving a <tt class="docutils literal"><span class="pre">'css/styles.55e7cbb9ba48.css'</span></tt> file with the following
-content:</p>
+<p><tt class="docutils literal"><span class="pre">CachedStaticFilesStorage</span></tt> ストレージバックエンドの <tt class="xref py py-meth docutils literal"><span class="pre">url()</span></tt> メソッドを呼ぶことで、置き換えられます。</p>
 <div class="highlight-css+django"><div class="highlight"><pre><span class="k">@import</span> <span class="nt">url</span><span class="o">(</span><span class="s2">&quot;/static/admin/css/base.27e20196a850.css&quot;</span><span class="o">)</span><span class="p">;</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">CachedStaticFilesStorage</span></tt> を有効かすることで、以下を確認して下さい。 :</p>
+<p><tt class="docutils literal"><span class="pre">CachedStaticFilesStorage</span></tt> を有効化するために、以下を確認して下さい。 :</p>
 <ul class="simple">
 <li><a class="reference internal" href="settings.html#staticfiles-storage"><em>STATICFILES_STORAGE</em></a> の設定は、 <tt class="docutils literal"><span class="pre">'staticfiles.storage.CachedStaticFilesStorage'</span></tt> に設定して下さい。</li>
 </ul>

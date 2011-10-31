@@ -1,0 +1,304 @@
+.. =======
+   Helpers
+   =======
+
+=============
+ヘルパー関数
+=============
+
+.. module:: staticfiles
+   :synopsis: An app for handling static files.
+
+.. Context processors
+   ==================
+
+コンテキストプロセッサ
+=======================
+
+.. The ``static`` context processor
+   --------------------------------
+
+``static`` コンテキストプロセッサ
+----------------------------------------------------
+
+.. function:: context_processors.static
+
+.. This context processor adds the ``STATIC_URL`` into each template
+   context as the variable ``{{ STATIC_URL }}``. To use it, make sure that
+   ``'staticfiles.context_processors.static'`` appears somewhere in your
+   ``TEMPLATE_CONTEXT_PROCESSORS`` setting.
+
+コンテキストプロセッサは ``{{ STATIC_URL }}`` に変数としてテンプレートに ``STATIC_URL`` を追加します。 それを使うためには、 ``TEMPLATE_CONTEXT_PROCESSORS`` の設定のどこかに ``'staticfiles.context_processors.static'`` があるか確認して下さい。
+
+.. Remember, only templates rendered with a ``RequestContext`` will have
+   acces to the data provided by this (and any) context processor.
+
+``RequestContext`` は任意のコンテキストプロセッサによって集められたデータにアクセスしてテンプレートをレンダリングすることしかしないことを覚えていて下さい。
+
+.. Template tags
+   =============
+
+テンプレートタグ
+====================
+
+.. highlight:: html+django
+
+static
+------
+
+.. function:: templatetags.staticfiles.static
+
+.. versionadded:: 1.1
+
+.. Uses the configued :ref:`STATICFILES_STORAGE` storage to create the
+   full URL for the given relative path, e.g.::
+
+相対パスを与えて、完全なURLを作成するために設定済みの :ref:`STATICFILES_STORAGE` ストレージを使います。例として ::
+
+    {% load staticfiles %}
+    <img src="{% static "css/base.css" %}" />
+
+.. The previous example is equal to calling the ``url`` method of an instance of
+   :ref:`STATICFILES_STORAGE` with ``"css/base.css"``. This is especially
+   useful when using a non-local storage backend to `deploy files to a CDN`_.
+
+上の例は、 ``"css/base.css"`` で :ref:`STATICFILES_STORAGE` のインスタンスの ``url`` メソッドを実行するのと同じことです。
+ローカルではないストレージバックエンドから `deploy files to a CDN`_ に使う時は特に有効です。
+
+.. _`deploy files to a CDN`: https://docs.djangoproject.com/en/dev/howto/static-files/#serving-static-files-from-a-cloud-service-or-cdn
+
+get_static_prefix
+-----------------
+
+.. function:: templatetags.static.get_static_prefix
+
+.. If you're not using ``RequestContext``, or if you need more control over
+   exactly where and how ``STATIC_URL`` is injected into the template,
+   you can use the ``get_static_prefix`` template tag instead::
+
+``RequestContext`` を使っていない場合、テンプレート内で ``STATIC_URL`` 、代わりに ``get_static_prefix`` テンプレートタグを使えます。 ::
+
+   {% load static %}
+   <img src="{% get_static_prefix %}images/hi.jpg" />
+
+.. There's also a second form you can use to avoid extra processing if you need
+   the value multiple times::
+
+複数回使う場合は、余分な処理を避けるために二つ目の方法も使えます。::
+
+   {% load static %}
+   {% get_static_prefix as STATIC_PREFIX %}
+
+   <img src="{{ STATIC_PREFIX }}images/hi.jpg" />
+   <img src="{{ STATIC_PREFIX }}images/hi2.jpg" />
+
+get_media_prefix
+----------------
+
+.. function:: templatetags.static.get_media_prefix
+
+.. Similar to :func:`~staticfiles.templatetags.static.get_static_prefix` but
+   uses the ``MEDIA_URL`` setting instead.
+
+:func:`~staticfiles.templatetags.static.get_static_prefix` と似ていますが、代わりに ``MEDIA_URL`` の設定が使えます。
+
+.. Storages
+   ========
+
+ストレージ
+==============
+
+StaticFilesStorage
+------------------
+
+.. class:: storage.StaticFilesStorage
+
+   .. A subclass of the :class:`~django.core.files.storage.FileSystemStorage`
+      storage backend that uses the :ref:`STATIC_ROOT` setting as the base
+      file system location and the :ref:`STATIC_URL` setting respectively
+      as the base URL.
+
+   :class:`~django.core.files.storage.FileSystemStorage` クラスのサブクラスで、 :ref:`STATIC_URL` をベースのURLとして、 :ref:`STATIC_ROOT` の設定をファイルシステムのベースの場所として使われます。
+
+   .. method:: post_process(paths, **options)
+
+   .. versionadded:: 1.1
+
+   .. This method is called by the :ref:`collectstatic` management command
+      after each run and gets passed the paths of found files, as well as the
+      command line options.
+
+   このメソッドは、 :ref:`collectstatic` 管理コマンド
+
+   .. The :class:`~staticfiles.storage.CachedStaticFilesStorage` uses this
+      behind the scenes to replace the paths with their hashed counterparts
+      and update the cache appropriately.
+
+   :class:`~staticfiles.storage.CachedStaticFilesStorage` クラスは
+
+CachedStaticFilesStorage
+------------------------
+
+.. class:: storage.CachedStaticFilesStorage
+
+   .. versionadded:: 1.1
+
+   .. A subclass of the :class:`~staticfiles.storage.StaticFilesStorage`
+      storage backend which caches the files it saves by appending the MD5 hash
+      of the file's content to the filename. For example, the file
+      ``css/styles.css`` would also be saved as ``css/styles.55e7cbb9ba48.css``.
+
+   :class:`~staticfiles.storage.StaticFilesStorage` クラスのサブクラスはファイルの内容のMD5ハッシュをファイル名に付けて保存して、ファイルをキャッシュします。例えば、 ``css/styles.css`` ファイルは、 ``css/styles.55e7cbb9ba48.css`` として保存されます。
+
+   .. The purpose of this storage is to keep serving the old files in case some
+      pages still refer to those files, e.g. because they are cached by you or
+      a 3rd party proxy server. Additionally, it's very helpful if you want to
+      apply `far future Expires headers`_ to the deployed files to speed up the
+      load time for subsequent page visits.
+
+   このストレージの目的は、あるページにおいて、サードパーティのプロキシサーバーによってキャッシュされた古いファイルを参照してファイルを配信し続けることです。さらに、訪問済みのページで読み込み時間をスピードアップするためにデプロイしたファイルに `far future Expires headers`_ を適用したい場合は、非常に便利です。
+
+   .. The storage backend automatically replaces the paths found in the saved
+      files matching other saved files with the path of the cached copy (using
+      the :meth:`~staticfiles.storage.StaticFilesStorage.post_process`
+      method). The regular expressions used to find those paths
+      (``storage.CachedStaticFilesStorage.cached_patterns``)
+      by default cover the `@import`_ rule and `url()`_ statement of `Cascading
+      Style Sheets`_. For example, the ``'css/styles.css'`` file with the
+      content
+
+   ストレージバックエンドは自動的に保管しているファイルを探すパスを書き換えます。
+   正規表現を使うと
+
+   .. code-block:: css+django
+
+       @import url("../admin/css/base.css");
+
+   .. would be replaced by calling the
+      :meth:`~django.core.files.storage.Storage.url`
+      method of the ``CachedStaticFilesStorage`` storage backend, ultimatively
+      saving a ``'css/styles.55e7cbb9ba48.css'`` file with the following
+      content:
+
+   ``CachedStaticFilesStorage`` ストレージバックエンドの :meth:`~django.core.files.storage.Storage.url` メソッドを呼ぶことで、置き換えられます。
+
+   .. code-block:: css+django
+
+       @import url("/static/admin/css/base.27e20196a850.css");
+
+   .. To enable the ``CachedStaticFilesStorage`` you have to make sure the
+      following requirements are met:
+
+   ``CachedStaticFilesStorage`` を有効化するために、以下を確認して下さい。 :
+
+   .. the :ref:`STATICFILES_STORAGE` setting is set to
+      ``'staticfiles.storage.CachedStaticFilesStorage'``
+
+   * :ref:`STATICFILES_STORAGE` の設定は、 ``'staticfiles.storage.CachedStaticFilesStorage'`` に設定して下さい。
+
+   .. the ``DEBUG`` setting is set to ``False``
+
+   * ``DEBUG`` を ``False`` にして下さい。
+
+   .. you use the ``staticfiles``
+      :func:`~staticfiles.templatetags.static.static` template
+      tag to refer to your static files in your templates
+
+   * ``staticfiles`` テンプレートで静的ファイルを参照するために :func:`~staticfiles.templatetags.static.static` というテンプレートタグを使います。
+
+   .. you've collected all your static files by using the
+      :ref:`collectstatic` management command
+
+   * :ref:`collectstatic` 管理コマンドを使って全ての静的ファイル集めます。
+
+   .. Since creating the MD5 hash can be a performance burden to your website
+      during runtime, ``staticfiles`` will automatically try to cache the
+      hashed name for each file path using Django's caching framework. If you
+      want to override certain options of the cache backend the storage uses,
+      simply specify a custom entry in the ``CACHES`` setting named
+      ``'staticfiles'``. It falls back to using the ``'default'`` cache backend.
+
+   MD5ハッシュを使ってサイトのパフォーマンスに負担がかかりますが、 ``staticfiles`` はDjangoのキャッシュフレームワークを使ってファイルのパスをキャッシュしようとします。もし、使っているストレージにキャッシュのオプションを上書きしたいなら、
+   'デフォルト' のキャッシュバックエンドを使ってフォールバックします。
+
+.. _`far future Expires headers`: http://developer.yahoo.com/performance/rules.html#expires
+.. _`@import`: http://www.w3.org/TR/CSS2/cascade.html#at-import
+.. _`url()`: http://www.w3.org/TR/CSS2/syndata.html#uri
+.. _`Cascading Style Sheets`: http://www.w3.org/Style/CSS/
+
+
+.. _staticfiles-development-view:
+
+Static file development view
+----------------------------
+
+.. highlight:: python
+
+.. function:: staticfiles.views.serve(request, path)
+
+.. This view function serves static files in development.
+
+開発時に静的ファイルを配信するビュー関数です。
+
+.. warning::
+
+  .. This view will only work if ``DEBUG`` is ``True``.
+
+     That's because this view is **grossly inefficient** and probably
+     **insecure**. This is only intended for local development, and should
+     **never be used in production**.
+
+  このビュー関数は ``DEBUG`` が ``True`` になっている場合のみ有効になります。
+
+  なぜなら、このビュー関数は **非効率的** で **セキュアではない** からです。ローカルの開発環境でのみ使って、 **本番環境では使わない** で下さい。
+
+.. This view is automatically enabled by ``runserver`` (with a
+   ``DEBUG`` setting set to ``True``). To use the view with a different
+   local development server, add the following snippet to the end of your
+   primary URL configuration::
+
+このビュー関数は ``runserver`` (``DEBUG`` が ``True`` になっている場合)で自動的に有効化されます。別のローカルの開発サーバーでこのビュー関数を使う場合は、メインのURL設定の最後に次のようなスニペットを追加してください。 ::
+
+  from django.conf import settings
+
+  if settings.DEBUG:
+      urlpatterns += patterns('staticfiles.views',
+          url(r'^static/(?P<path>.*)$', 'serve'),
+      )
+
+.. Note, the begin of the pattern (``r'^static/'``) should be your
+   ``STATIC_URL`` setting.
+
+URLパターンの最初(``r'^static/'``)は、 ``STATIC_URL`` で設定したものにして下さい。
+
+.. URL patterns helper
+   -------------------
+
+URLパターン関数
+------------------------
+
+.. function:: staticfiles.urls.staticfiles_urlpatterns()
+
+.. warning::
+
+  .. This helper function will only work if ``DEBUG`` is ``True``
+     and your ``STATIC_URL`` setting is neither empty nor a full
+     URL such as ``http://static.example.com/``.
+
+  このヘルパー関数は、設定の ``DEBUG`` が ``True`` の時と、 ``STATIC_URL`` が空ではなくて、 ``http://static.example.com/`` のようにURLが指定されていない時に有効です。
+
+.. Since configuring the URL patterns is a bit finicky, there's also a helper
+   function that'll do this for you.
+
+URLパターンを設定することは面倒なので、あなたの代わりに設定してくれるヘルパー関数があります。
+
+.. This will return the proper URL pattern for serving static files to your
+   already defined pattern list. Use it like this::
+
+これは、既に定義したURKパターンのリストから静的ファイルを配信するための適切なURLパターンを返します。以下のように使います。 ::
+
+  from staticfiles.urls import staticfiles_urlpatterns
+
+  # ... the rest of your URLconf here ...
+
+  urlpatterns += staticfiles_urlpatterns()
