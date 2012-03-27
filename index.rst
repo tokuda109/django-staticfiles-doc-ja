@@ -15,10 +15,17 @@ Djangoの ``staticfiles`` では **サポートしていない** ``django-static
 
 * Django 1.2.X で動作します。
 
-.. ``STATICFILES_EXCLUDED_APPS`` settings -- A sequence of dotted app paths
-   that should be ignored when searching for static files
+.. :attr:`~django.conf.settings.STATICFILES_EXCLUDED_APPS` settings -- A
+   sequence of dotted app paths that should be ignored when searching for
+   static files.
 
-* ``STATICFILES_EXCLUDED_APPS`` は、静的ファイルを探す時にアプリケーションのパスをドットの区切りから除外するものを指定します。
+* :attr:`~django.conf.settings.STATICFILES_EXCLUDED_APPS` は、静的ファイルを探す時に、無視すべきものをドット区切りのアプリケーションのパスのシーケンスで指定します。
+
+.. :attr:`~django.conf.settings.STATICFILES_IGNORE_PATTERNS` settings -- A
+   sequence of glob patterns of files and directories to ignore when running
+   ``collectstatic``.
+
+* :attr:`~django.conf.settings.STATICFILES_IGNORE_PATTERNS` は、 ``collectstatic`` を実行した時に無視するファイルやディレクトリのパターンを指定します。
 
 .. Legacy 'media' dir file finder -- a staticfiles finder that supports the
    location for static files that a lot of 3rd party apps support
