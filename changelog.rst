@@ -4,6 +4,36 @@
 変更履歴
 ===============
 
+v1.2.1 (2012-02-16)
+-------------------
+
+.. Backported a change from Django trunk that prevents openening too
+   many files at once when running the ``collectstatic`` management
+   command.
+
+``collectstatic`` 管理コマンドを実行した時に、一度にたくさんのファイルを開かないようにする変更を、Django trunkに反映させました。
+
+v1.2 (2012-02-12)
+-----------------
+
+.. Added ``STATICFILES_IGNORE_PATTERNS`` setting to globally ignore
+   files when running the ``collectstatic`` management command.
+
+``collectstatic`` 管理コマンドを実行した時に、グローバルに無視するファイルを ``STATICFILES_IGNORE_PATTERNS`` に設定できるようにしました。
+
+.. Refactored ``CachedFilesMixin`` and management command to only
+   post process the collected files if really needed.
+
+``CachedFilesMixin`` をリファクタリングして、
+
+.. Added support for URL fragment to the ``CachedStaticFilesStorage``.
+
+``CachedStaticFilesStorage`` にURLの一部をサポートする機能を追加しました。
+
+.. Stopped using versiontools_ again as it caused installation time issues.
+
+インストールの時に問題があるので再びversiontools_を使うのを止めました。
+
 v1.1.2 (2011-08-25)
 -------------------
 
