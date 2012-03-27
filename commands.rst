@@ -17,10 +17,11 @@ collectstatic
 インストールしている全てのアプリケーションから静的ファイルを集めて :ref:`STATICFILES_STORAGE` にコピーします。
 
 .. Duplicate file names are resolved in a similar way to how template resolution
-   works. Files are initially searched for in :ref:`STATICFILES_DIRS` locations,
-   followed by apps in the order specified by the ``INSTALLED_APPS`` setting.
+   works. Files are initially searched for in
+   :attr:`~django.conf.settings.STATICFILES_DIRS` locations, followed by apps in
+   the order specified by the ``INSTALLED_APPS`` setting.
 
-ファイル名の重複は、テンプレートが処理と同じような方法で解決するようにしています。ファイルは :ref:`STATICFILES_DIRS` に指定した場所や ``INSTALLED_APPS`` の設定で指定した順にアプリケーションの場所から最初に検索されます。
+ファイル名の重複は、テンプレートが処理と同じような方法で解決するようにしています。ファイルは :attr:`~django.conf.settings.STATICFILES_DIRS` に指定した場所や ``INSTALLED_APPS`` の設定で指定した順にアプリケーションの場所から最初に検索されます。
 
 .. Some commonly used options are:
 
@@ -150,7 +151,7 @@ runserver
      **never be used in production** and is only available if the
      ``staticfiles`` app is in your project's ``INSTALLED_APPS`` setting.
 
-  これを使用することで、 **非効率的** で **セキュアではない** ということを把握してください。
+  これを使用することで、 **非効率的** で **セキュアではない** ということを気に留めておいてください。
 
   ローカル環境とセッティングの ``INSTALLED_APPS`` で ``staticfiles`` がインストールされている時のみを対象としているので、 **本番の環境では使わないで下さい** 。
 

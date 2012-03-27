@@ -12,8 +12,8 @@
 .. Context processors
    ==================
 
-コンテキストプロセッサ
-=======================
+コンテキストプロセッサ－
+===================================
 
 .. The ``static`` context processor
    --------------------------------
@@ -39,7 +39,7 @@
    =============
 
 テンプレートタグ
-====================
+=========================
 
 .. highlight:: html+django
 
@@ -50,19 +50,20 @@ static
 
 .. versionadded:: 1.1
 
-.. Uses the configued :ref:`STATICFILES_STORAGE` storage to create the
-   full URL for the given relative path, e.g.::
+.. Uses the configued :attr:`~django.conf.settings.STATICFILES_STORAGE` storage
+   to create the full URL for the given relative path, e.g.::
 
-相対パスを与えて、完全なURLを作成するために設定済みの :ref:`STATICFILES_STORAGE` ストレージを使います。例として ::
+相対パスを与えて、完全なURLを作成するために設定済みの :attr:`~django.conf.settings.STATICFILES_STORAGE` ストレージを使います。例として ::
 
     {% load staticfiles %}
     <img src="{% static "css/base.css" %}" />
 
 .. The previous example is equal to calling the ``url`` method of an instance of
-   :ref:`STATICFILES_STORAGE` with ``"css/base.css"``. This is especially
-   useful when using a non-local storage backend to `deploy files to a CDN`_.
+   :attr:`~django.conf.settings.STATICFILES_STORAGE` with ``"css/base.css"``.
+   This is especially useful when using a non-local storage backend to `deploy
+   files to a CDN`_.
 
-上の例は、 ``"css/base.css"`` で :ref:`STATICFILES_STORAGE` のインスタンスの ``url`` メソッドを実行するのと同じことです。
+上の例は、 ``"css/base.css"`` で :attr:`~django.conf.settings.STATICFILES_STORAGE` のインスタンスの ``url`` メソッドを実行するのと同じことです。
 ローカルではないストレージバックエンドから `deploy files to a CDN`_ に使う時は特に有効です。
 
 .. _`deploy files to a CDN`: https://docs.djangoproject.com/en/dev/howto/static-files/#serving-static-files-from-a-cloud-service-or-cdn
@@ -106,7 +107,7 @@ get_media_prefix
    ========
 
 ストレージ
-==============
+==================
 
 StaticFilesStorage
 ------------------
@@ -114,11 +115,12 @@ StaticFilesStorage
 .. class:: storage.StaticFilesStorage
 
    .. A subclass of the :class:`~django.core.files.storage.FileSystemStorage`
-      storage backend that uses the :ref:`STATIC_ROOT` setting as the base
-      file system location and the :ref:`STATIC_URL` setting respectively
-      as the base URL.
+      storage backend that uses the :attr:`~django.conf.settings.STATIC_ROOT`
+      setting as the base file system location and the
+      :attr:`~django.conf.settings.STATIC_URL` setting respectively as the base
+      URL.
 
-   :class:`~django.core.files.storage.FileSystemStorage` クラスのサブクラスで、 :ref:`STATIC_URL` をベースのURLとして、 :ref:`STATIC_ROOT` の設定をファイルシステムのベースの場所として使われます。
+   :class:`~django.core.files.storage.FileSystemStorage` クラスのサブクラスで、 :attr:`~django.conf.settings.STATIC_URL` をベースのURLとして、 :attr:`~django.conf.settings.STATIC_ROOT` の設定をファイルシステムのベースの場所として使われます。
 
    .. method:: post_process(paths, **options)
 
@@ -192,10 +194,10 @@ CachedStaticFilesStorage
 
    ``CachedStaticFilesStorage`` を有効化するために、以下を確認して下さい。 :
 
-   .. the :ref:`STATICFILES_STORAGE` setting is set to
+   .. the :attr:`~django.conf.settings.STATICFILES_STORAGE` setting is set to
       ``'staticfiles.storage.CachedStaticFilesStorage'``
 
-   * :ref:`STATICFILES_STORAGE` の設定は、 ``'staticfiles.storage.CachedStaticFilesStorage'`` に設定して下さい。
+   * :attr:`~django.conf.settings.STATICFILES_STORAGE` の設定は、 ``'staticfiles.storage.CachedStaticFilesStorage'`` に設定して下さい。
 
    .. the ``DEBUG`` setting is set to ``False``
 
